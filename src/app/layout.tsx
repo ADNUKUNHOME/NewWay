@@ -39,8 +39,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <FullGridBackground />
-        <div className="relative z-10 min-h-screen">
+        <div className="relative min-h-screen">
+          <FullGridBackground />
           <Header />
           {children}
         </div>
