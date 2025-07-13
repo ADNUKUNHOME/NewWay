@@ -25,7 +25,7 @@ const Header = () => {
                     <Link href="#about" className="text-white hover:text-yellow-300 transition-colors">About It</Link>
                     <Link href="/contact" className="text-white hover:text-yellow-300 transition-colors">Contact</Link>
                 </nav>
-                <div className="flex items-center space-x-4 hidden md:flex">
+                <div className="items-center space-x-4 hidden md:flex">
                     <Link href="/login" className="text-white bg-yellow-500 hover:bg-yellow-600 transition-colors px-4 py-2 rounded-md">
                         Login
                     </Link>

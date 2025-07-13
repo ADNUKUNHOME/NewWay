@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import SquareGridBackground from "../common/bg";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
