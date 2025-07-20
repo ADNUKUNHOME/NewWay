@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "../components/common/header";
 import FullGridBackground from "@/components/common/bg";
 import Footer from "@/components/common/footer";
+import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "../../AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,13 +42,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="relative min-h-screen">
-          <FullGridBackground />
-          <Header />
-          {children}
-          <Footer />
-        </div>
-
+        <AuthProvider>
+          <Toaster />
+          <div className="relative min-h-screen">
+            <FullGridBackground />
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
