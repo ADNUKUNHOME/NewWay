@@ -6,10 +6,24 @@ import FullGridBackground from "./bg";
 import { useAuth } from "../../../AuthContext";
 import HeaderRight from "./header-right";
 import HeaderMobileMenu from "./header-mobile-menu";
-
+import { cn } from "@/lib/utils";
 
 const Header = () => {
+
     const { user, logout } = useAuth();
+
+    const MenuItems = () => {
+        return (
+            <>
+                <Link href={cn(user ? "/assessment" : "/auth/login")} className="text-white hover:text-yellow-300 transition-colors">Assessment</Link>
+                <Link href="/resources" className="text-white hover:text-yellow-300 transition-colors">Resources</Link>
+                <Link href="/about" className="text-white hover:text-yellow-300 transition-colors">About</Link>
+                <Link href="/contact" className="text-white hover:text-yellow-300 transition-colors">Contact</Link>
+            </>
+        );
+    }
+
+
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/10 shadow-md">
             <FullGridBackground />
@@ -34,18 +48,5 @@ const Header = () => {
         </header>
     );
 };
-
-const MenuItems = () => {
-    return (
-        <>
-            <Link href="/roadmap" className="text-white hover:text-yellow-300 transition-colors">Roadmap</Link>
-            <Link href="/resources" className="text-white hover:text-yellow-300 transition-colors">Resources</Link>
-            <Link href="/about" className="text-white hover:text-yellow-300 transition-colors">About</Link>
-            <Link href="/contact" className="text-white hover:text-yellow-300 transition-colors">Contact</Link>
-        </>
-    );
-}
-
-
 
 export default Header;

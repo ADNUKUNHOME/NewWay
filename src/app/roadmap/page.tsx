@@ -1,4 +1,3 @@
-import { FormInput } from "@/components/roadmap/input";
 
 export default function Roadmap() {
     return (
@@ -7,7 +6,6 @@ export default function Roadmap() {
                 <h1 className="text-4xl font-bold text-slate-100 ">Your Roadmap to Success</h1>
                 <p className="text-2xl font-bold text-gray-400">We will build your future beautiful based on your current sitiuation</p>
                 <p className="text-lg text-gray-500">Stay tuned for updates on your personalized roadmap!</p>
-                <FormInput />
             </div>
         </section>
     )
