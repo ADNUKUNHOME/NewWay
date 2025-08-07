@@ -8,10 +8,12 @@ import { CreateRoadmapApiCall } from "@/actions/roadmap/createRoadmap";
 import { toast } from "sonner";
 
 export default function AssessmentForm({
+    setGeneratedRoadmap,
     selectedLevel,
     setSelectedLevel,
     setStep,
 }: {
+    setGeneratedRoadmap: (roadmap: string | null) => void;
     selectedLevel: string;
     setSelectedLevel: (level: string) => void;
     setStep: (step: number) => void;
@@ -36,12 +38,14 @@ export default function AssessmentForm({
             if (data.success) {
                 toast.success("Roadmap created successfully!");
                 console.log("Roadmap created successfully:", data);
+                setGeneratedRoadmap(data.data.roadmap);
+                setStep(4);
             } else {
                 toast.error(data.message || "Failed to create roadmap.");
                 console.error("Error creating roadmap:", data);
             }
         })
-    };
+    }
 
     return (
         <form

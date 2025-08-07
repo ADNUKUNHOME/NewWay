@@ -7,14 +7,15 @@ export async function CreateRoadmapApiCall({ formData }: { formData: any }) {
         if (response.status === 200) {
             return {
                 success: true,
-                message: "Roadmap generated successfully!"
+                message: "Roadmap generated successfully!",
+                data: response.data,
             };
         }
 
         return {
             success: false,
             message: "Failed to generate roadmap. Please try again.",
-            response
+
         };
 
     } catch (error: any) {
