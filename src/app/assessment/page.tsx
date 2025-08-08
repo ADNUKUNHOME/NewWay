@@ -8,12 +8,38 @@ import ManualSelection from "@/components/assessment/manual-selection";
 import AssessmentForm from "@/components/assessment/form";
 import ReactMarkdown from 'react-markdown';
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { SaveRoadmapApiCall } from "@/actions/roadmap/saveRoadmap";
+import { useAuth } from "../../../AuthContext";
 
 
 export default function Assessment() {
     const [step, setStep] = useState(0);
     const [selectedLevel, setSelectedLevel] = useState("");
     const [generatedRoadmap, setGeneratedRoadmap] = useState<string | null>(null);
+    const { user } = useAuth();
+
+    const handleSavingRoadmap = () => {
+        if (!generatedRoadmap) {
+            toast.error("Please complete your assessment to create roadmap!");
+            return;
+        }
+
+        SaveRoadmapApiCall({
+            roadmapName: "My Personalized Roadmap",
+            description: generatedRoadmap || "",
+            createdBy: user?.email || "anonymous",
+        }).then((data) => {
+            if (data.success) {
+                toast.success(data.message || "Roadmap saved successfully!");
+            } else {
+                toast.error(data.message || "Failed to save roadmap! Please try again.");
+            }
+
+        })
+
+
+    }
 
     return (
         <section className="flex flex-col items-center justify-center min-h-screen w-full gap-6 pt-20 px-4">
@@ -63,9 +89,10 @@ export default function Assessment() {
                             Start Over
                         </Button>
                         <Button
+                            onClick={handleSavingRoadmap}
                             className="ml-4 mt-6 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition"
                         >
-                            save roadmap
+                            Save Roadmap
                         </Button>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import axios from "axios";
 
 export async function handleLoginApiCall(email: string, password: string) {
     try {
-        const response = await axios.post("http://localhost:3000/api/auth/login", {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
             email,
             password,
         })
@@ -12,9 +12,24 @@ export async function handleLoginApiCall(email: string, password: string) {
     } catch (error: any) {
         console.error("Error during login:", error);
 
-        const message = error?.response?.data?.message || "Login failed. Please try again.";
+        if (error.response) {
+            return {
+                success: false,
+                message: error.response?.data?.message || "An error occurred during login.",
+            };
+        }
 
-        return { success: false, message };
+        if (error.request) {
+            return {
+                success: false,
+                message: "No response from server. Please check your internet connection"
+            };
+        }
+
+        return {
+            success: false,
+            message: "Unexpected error occurred during login."
+        }
     }
 
 }

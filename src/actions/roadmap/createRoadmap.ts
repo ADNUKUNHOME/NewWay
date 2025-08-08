@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function CreateRoadmapApiCall({ formData }: { formData: any }) {
     try {
-        const response = await axios.post('http://localhost:3000/api/roadmap/generate', formData);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/roadmap/generate`, formData);
 
         if (response.status === 200) {
             return {
