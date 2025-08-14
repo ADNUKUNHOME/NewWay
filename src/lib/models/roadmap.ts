@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { models } from "mongoose";
 
 const RoadmapSchema = new mongoose.Schema({
     roadmapName: {
@@ -17,5 +17,5 @@ const RoadmapSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-const Roadmap = mongoose.model("Roadmap", RoadmapSchema);
+const Roadmap = models.Roadmap || mongoose.model("Roadmap", RoadmapSchema);
 export default Roadmap;

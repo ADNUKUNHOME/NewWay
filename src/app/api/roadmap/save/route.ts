@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     } catch (error: any) {
         console.error("Error saving roadmap:", error);
         return NextResponse.json(
-            { success: false, message: error.message || "Failed to save roadmap. Please try again." },
+            { success: false, message: "Failed to save roadmap. Please try again." },
             { status: 500 },
         );
     }
