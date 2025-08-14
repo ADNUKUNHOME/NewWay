@@ -13,7 +13,7 @@ export default function NavigationControls({
     totalSections: number;
 }) {
     return (
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full mb-3">
             <Button
                 variant="outline"
                 disabled={currentSection === 0}

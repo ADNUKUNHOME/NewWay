@@ -1,12 +1,37 @@
-import { Button } from "../ui/button";
+"use client";
 
-export default function ShareButton() {
+import { Button } from "../ui/button";
+import { toast } from "sonner";
+
+export default function ShareButton({ content }: { content: string }) {
+    const stripMarkdown = (markdown: string) => {
+        // Remove bold/italic markers like ** and *
+        let text = markdown.replace(/\*\*/g, "").replace(/\*/g, "");
+
+        // Remove other markdown syntax like headings (#) and extra spaces
+        text = text.replace(/^#+\s?/gm, "");
+
+        return text.trim();
+    };
+
+    const handleCopy = async () => {
+        try {
+            const plainText = stripMarkdown(content);
+            await navigator.clipboard.writeText(plainText);
+            toast.success("Roadmap copied to clipboard!");
+        } catch (err) {
+            console.error("Failed to copy roadmap:", err);
+            toast.error("Failed to copy roadmap!");
+        }
+    };
+
     return (
         <Button
             variant="outline"
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-md transition-colors duration-300"
+            onClick={handleCopy}
         >
-            Share Roadmap
+            Copy Roadmap
         </Button>
-    )
+    );
 }
