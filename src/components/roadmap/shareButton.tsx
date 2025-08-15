@@ -1,5 +1,6 @@
 "use client";
 
+import { Copy } from "lucide-react";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 
@@ -27,11 +28,12 @@ export default function ShareButton({ content }: { content: string }) {
 
     return (
         <Button
-            variant="outline"
+            variant="default"
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-md transition-colors duration-300"
             onClick={handleCopy}
         >
-            Copy Roadmap
+            <Copy />
+            <span className="hidden md:flex ml-2">Copy</span>
         </Button>
     );
 }

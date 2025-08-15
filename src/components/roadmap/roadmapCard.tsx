@@ -20,7 +20,7 @@ export default function RoadmapCard({
 }) {
     const totalSections = sections.length;
     return (
-        <Card className="flex flex-col items-center justify-center bg-black/10 backdrop-blur-xs border-4 border-black hover:shadow-2xl mx-auto text-center pb-0 px-12 sm:px-5 md:px-10 space-y-6 w-full sm:w-[500px] md:w-[650px] lg:w-[800px] min-h-[400px]">
+        <Card className="flex flex-col items-center justify-center bg-black/10 backdrop-blur-xs border-0 border-b border-b-slate-400 hover:shadow-2xl mx-auto text-center pb-0 px-12 sm:px-5 md:px-10 space-y-6 w-full sm:w-[500px] md:w-[650px] lg:w-[800px] min-h-[400px]">
             <ProgressBar
                 sections={sections}
                 currentSection={currentSection}

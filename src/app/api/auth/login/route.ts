@@ -43,6 +43,7 @@ export async function POST(req: Request) {
             user: {
                 id: user._id,
                 email: user.email,
+                hasRoadmap: user.hasRoadmap,
             },
             token: token,
         }

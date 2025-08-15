@@ -9,7 +9,11 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    hasRoadmap: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 const User = models.User || mongoose.model("User", UserSchema);

@@ -1,3 +1,4 @@
+import { DownloadIcon } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function DownloadButton({ roadmapData }: { roadmapData: { title: string; content: string }[] }) {
@@ -25,11 +26,12 @@ export default function DownloadButton({ roadmapData }: { roadmapData: { title: 
 
     return (
         <Button
-            variant="outline"
+            variant="default"
             onClick={handleDownload}
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition-colors duration-300"
         >
-            Download Roadmap
+            <DownloadIcon />
+            <span className="hidden md:flex ml-2">Download</span>
         </Button>
     );
 }

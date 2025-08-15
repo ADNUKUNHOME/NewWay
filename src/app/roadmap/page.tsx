@@ -13,6 +13,7 @@ export default function Roadmap() {
     const [sections, setSections] = useState<{ title: string, content: string }[]>([]);
     const [loading, setLoading] = useState(false);
     const [hasTriedRefresh, setHasTriedRefresh] = useState(false);
+    const [isRealRoadmap, setIsRealRoadmap] = useState(false);
     const { user } = useAuth();
     const createdBy = user?.email || "";
 
@@ -40,6 +41,7 @@ export default function Roadmap() {
                 const roadmapText = data.roadmap.description;
                 setSections(splitRoadmap(roadmapText));
                 setHasTriedRefresh(false);
+                setIsRealRoadmap(true);
                 console.log("Roadmap data fetched successfully:", data);
             } else {
                 console.error("Failed to fetch roadmap:", data.message);
@@ -66,7 +68,7 @@ export default function Roadmap() {
         <section className="flex flex-col items-center justify-center min-h-screen mx-auto px-4 sm:px-6 lg:px-8 pt-20">
             <RoadmapHeader
                 sections={sections}
-                hasTriedRefresh={hasTriedRefresh}
+                isRealRoadmap={isRealRoadmap}
                 FetchRoadmap={FetchRoadmap}
             />
             <RoadmapCard

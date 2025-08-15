@@ -11,11 +11,16 @@ import { cn } from "@/lib/utils";
 const Header = () => {
 
     const { user, logout } = useAuth();
+    const hasRoadmap = user?.hasRoadmap;
 
     const MenuItems = () => {
         return (
             <>
-                <Link href={cn(user ? "/assessment" : "/auth/login")} className="text-white hover:text-yellow-300 transition-colors">Assessment</Link>
+                <Link href={cn(user ? hasRoadmap ? "/roadmap" : "/assessment" : "/auth/login")} className="text-white hover:text-yellow-300 transition-colors">
+                    {
+                        hasRoadmap ? "Roadmap" : "Assessment"
+                    }
+                </Link>
                 <Link href="/resources" className="text-white hover:text-yellow-300 transition-colors">Resources</Link>
                 <Link href="/about" className="text-white hover:text-yellow-300 transition-colors">About</Link>
                 <Link href="/contact" className="text-white hover:text-yellow-300 transition-colors">Contact</Link>

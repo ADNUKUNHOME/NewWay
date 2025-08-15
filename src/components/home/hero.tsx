@@ -8,6 +8,8 @@ import { useAuth } from "../../../AuthContext";
 
 export default function HomeHero() {
     const { user } = useAuth();
+    const hasRoadmap = user?.hasRoadmap;
+
     return (
         <section className="relative w-full h-screen overflow-hidden">
             <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
@@ -15,7 +17,7 @@ export default function HomeHero() {
                 <p className="mt-4 text-lg text-gray-300">
                     Personalized AI Roadmaps for Students
                 </p>
-                <Link href={cn(user ? "/assessment" : "/auth/login")} className="mt-6">
+                <Link href={cn(user ? hasRoadmap ? "/roadmap" : "/assessment" : "/auth/login")} className="mt-6">
                     <Button className="mt-8 px-10 py-3 bg-slate-200 hover:bg-white hover:scale-105 hover:no-underline text-black font-semibold rounded-lg transition-all duration-300">
                         Get Started
                         <ArrowRight className="ml-2 inline-block" />

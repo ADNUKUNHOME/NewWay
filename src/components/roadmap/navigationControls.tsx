@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function NavigationControls({
     currentSection,
@@ -18,9 +19,9 @@ export default function NavigationControls({
                 variant="outline"
                 disabled={currentSection === 0}
                 onClick={() => setCurrentSection(prev => Math.max(prev - 1, 0))}
-                className="px-3 py-2 bg-gray-300 hover:bg-yellow-600 text-gray-900 border-none transition-colors duration-300"
+                className="px-3 py-3 bg-gray-300 hover:bg-yellow-600 text-gray-900 rounded-full border-none transition-colors duration-300"
             >
-                Previous
+                <ChevronLeft />
             </Button>
 
             <div className="flex items-center space-x-2 overflow-x-auto">
@@ -29,7 +30,7 @@ export default function NavigationControls({
                         key={index}
                         onClick={() => setCurrentSection(index)}
                         className={cn(
-                            "w-3 h-3 rounded-full cursor-pointer transition-colors duration-300",
+                            "w-3 h-3 sm:w-2 md:w-3 sm:h-2 md:h-3 rounded-full cursor-pointer transition-colors duration-300",
                             currentSection === index ? "bg-yellow-500" : "bg-gray-300"
                         )}
                     />
@@ -40,9 +41,9 @@ export default function NavigationControls({
                 variant="outline"
                 disabled={currentSection === totalSections - 1}
                 onClick={() => setCurrentSection(prev => Math.min(prev + 1, totalSections - 1))}
-                className="px-3 py-2 bg-gray-300 hover:bg-yellow-600 text-gray-900 border-none transition-colors duration-300"
+                className="px-3 py-3 bg-gray-300 hover:bg-yellow-600 text-gray-900 rounded-full border-none transition-colors duration-300"
             >
-                Next
+                <ChevronRight />
             </Button>
         </div>
     );

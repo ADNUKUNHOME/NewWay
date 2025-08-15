@@ -1,24 +1,40 @@
+import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 export default function ResumeSection({ setStep }: { setStep: (step: number) => void }) {
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0] || null;
+        if (file) {
+            console.log("Resume selected:", file.name);
+            setSelectedFile(file);
+        } else {
+            setSelectedFile(null);
+        }
+    };
+
+    const handleSubmit = async () => {
+
+    };
+
     return (
         <div className="flex flex-col gap-4 items-center w-full max-w-md">
             <h2 className="text-xl font-semibold text-white">Upload Your Resume</h2>
             <Input
                 type="file"
-                accept=".pdf,.doc,.docx"
+                accept=".pdf,.docx"
                 className="text-white"
-                onChange={(e: any) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        console.log("Resume selected:", file.name);
-                    }
-                }}
+                onChange={handleFileChange}
             />
+            {selectedFile && (
+                <p className="text-sm text-gray-300">Selected file: {selectedFile.name}</p>
+            )}
             <Button
-                onClick={() => alert("Resume submitted (mock)")}
-                className="mt-4 px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700"
+                onClick={handleSubmit}
+                className="mt-4 px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
+                disabled={!selectedFile}
             >
                 Submit Resume
             </Button>
@@ -29,5 +45,5 @@ export default function ResumeSection({ setStep }: { setStep: (step: number) => 
                 Go Back
             </Button>
         </div>
-    )
+    );
 }

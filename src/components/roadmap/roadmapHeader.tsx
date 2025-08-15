@@ -7,31 +7,27 @@ import UpdateButton from "./updateButton";
 
 export default function RoadmapHeader({
     sections,
-    hasTriedRefresh,
+    isRealRoadmap,
     FetchRoadmap,
 }: {
     sections: { title: string, content: string }[];
-    hasTriedRefresh: boolean;
+    isRealRoadmap: boolean;
     FetchRoadmap: () => void;
 }) {
     return (
-        <Card className="flex flex-col items-center justify-center bg-black/10 backdrop-blur-xs border-4 border-black hover:shadow-2xl mx-auto text-center py-5 px-12 sm:px-5 md:px-10 mb-8  w-full sm:w-[500px] md:w-[650px] lg:w-[800px]">
+        <Card className="flex flex-col items-center justify-center bg-black/10 backdrop-blur-xs border-0 border-t border-b border-slate-400 hover:shadow-2xl text-center mt-16  py-5 px-12 sm:px-5 md:px-10 mb-8  w-full sm:w-[500px] md:w-[650px] lg:w-[800px]">
             <h1 className="text-4xl font-bold text-yellow-300">Your Personalized Roadmap</h1>
             <p className="text-lg text-gray-400">Here is your personalized roadmap based on your assessment results.</p>
-            {sections || !hasTriedRefresh ?
+            {isRealRoadmap ?
                 (
-                    <>
-                        <div className="flex items-center justify-between mt-4 w-full">
-                            <DownloadButton roadmapData={sections} />
-                            <ShareButton
-                                content={sections.map(s => `${s.title}\n\n${s.content}`).join("\n\n")}
-                            />
-                        </div>
-                        <div className="flex items-center justify-between mt-4 w-full">
-                            <UpdateButton />
-                            <DeleteButton />
-                        </div>
-                    </>
+                    <div className="flex items-center justify-between w-full">
+                        <DownloadButton roadmapData={sections} />
+                        <ShareButton
+                            content={sections.map(s => `${s.title}\n\n${s.content}`).join("\n\n")}
+                        />
+                        <UpdateButton />
+                        <DeleteButton />
+                    </div>
                 ) : (
                     <Button
                         variant="outline"
