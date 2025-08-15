@@ -19,6 +19,7 @@ export default function AssessmentForm({
     setStep: (step: number) => void;
 }) {
 
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         education: selectedLevel,
@@ -34,13 +35,16 @@ export default function AssessmentForm({
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
+        setLoading(true);
         CreateRoadmapApiCall({ formData }).then((data) => {
             if (data.success) {
+                setLoading(false);
                 toast.success("Roadmap created successfully!");
                 console.log("Roadmap created successfully:", data);
                 setGeneratedRoadmap(data.data.roadmap);
                 setStep(4);
             } else {
+                setLoading(false);
                 toast.error(data.message || "Failed to create roadmap.");
                 console.error("Error creating roadmap:", data);
             }
@@ -50,7 +54,7 @@ export default function AssessmentForm({
     return (
         <form
             onSubmit={handleSubmit}
-            className="w-full max-w-md flex flex-col gap-4"
+            className="w-full max-w-md flex flex-col gap-4 mt-10"
         >
             <h2 className="text-xl text-white font-semibold text-center">
                 You selected: {selectedLevel}
@@ -69,6 +73,7 @@ export default function AssessmentForm({
                 placeholder="e.g., John Doe"
                 className="text-white placeholder:text-gray-400"
                 onChange={handleInputChange}
+                value={formData.name}
                 required
             />
 
@@ -81,6 +86,7 @@ export default function AssessmentForm({
                 placeholder="e.g., Science, Technology, etc."
                 className="text-white placeholder:text-gray-400"
                 onChange={handleInputChange}
+                value={formData.interests}
                 required
             />
 
@@ -93,6 +99,7 @@ export default function AssessmentForm({
                 placeholder="e.g., 10 hours"
                 className="text-white placeholder:text-gray-400"
                 onChange={handleInputChange}
+                value={formData.timePerWeek}
                 required
             />
 
@@ -105,6 +112,7 @@ export default function AssessmentForm({
                 placeholder="e.g., Want to become a developer"
                 className="text-white placeholder:text-gray-400"
                 onChange={handleInputChange}
+                value={formData.goals}
                 required
             />
 
@@ -117,13 +125,25 @@ export default function AssessmentForm({
                 placeholder="Anything else you'd like to add"
                 className="text-white placeholder:text-gray-400"
                 onChange={handleInputChange}
+                value={formData.additionalInfo}
             />
 
             <Button
                 type="submit"
                 className="mt-4 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition"
+                disabled={
+                    loading ||
+                    !formData.name.trim() ||
+                    !formData.interests.trim() ||
+                    !formData.timePerWeek.trim() ||
+                    !formData.goals.trim()
+                }
             >
-                Submit Assessment
+                {
+                    loading ?
+                        "Creating Your Roadmap..."
+                        : "Submit Assessment"
+                }
             </Button>
 
             <Button
