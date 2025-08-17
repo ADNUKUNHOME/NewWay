@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { ROADMAP_GENERATION_PROMPT } from "@/constants/roadmapPrompt";
 
-// Make sure GEMINI_API_KEY is correctly set in your .env.local
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export async function POST(req: Request) {

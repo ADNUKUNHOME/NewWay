@@ -1,10 +1,19 @@
 import { useState, DragEvent } from "react";
 import { Button } from "../ui/button";
 import { FileUp } from "lucide-react";
+import { ResumeRoadmapCreation } from "@/actions/roadmap/resumeRoadmapCreation";
+import { toast } from "sonner";
 
-export default function ResumeSection({ setStep }: { setStep: (step: number) => void }) {
+export default function ResumeSection({
+    setStep,
+    setGeneratedRoadmap,
+}: {
+    setStep: (step: number) => void;
+    setGeneratedRoadmap: (roadmap: string | null) => void;
+}) {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [isDragging, setIsDragging] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
@@ -30,9 +39,23 @@ export default function ResumeSection({ setStep }: { setStep: (step: number) => 
 
     const handleDragLeave = () => setIsDragging(false);
 
-    const handleSubmit = async () => {
-        console.log("Submitting file:", selectedFile);
-        // TODO: Upload logic
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        ResumeRoadmapCreation({ selectedFile }).then((data) => {
+            if (data.success) {
+                console.log("Roadmap created successfully:", data);
+                toast.success("Roadmap created successfully!");
+                setLoading(false);
+                setSelectedFile(null);
+                setGeneratedRoadmap(data.roadmap);
+                setStep(4);
+            } else {
+                console.error("Error generating roadmap from resume:", data);
+                setLoading(false);
+                toast.error(data.message || "Failed to create roadmap.");
+            }
+        })
     };
 
     return (
@@ -66,9 +89,11 @@ export default function ResumeSection({ setStep }: { setStep: (step: number) => 
             <Button
                 onClick={handleSubmit}
                 className="mt-4 px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700"
-                disabled={!selectedFile}
+                disabled={!selectedFile || loading}
             >
-                Submit Resume
+                {
+                    loading ? "Generating Roadmap..." : "Generate Roadmap"
+                }
             </Button>
             <Button
                 onClick={() => setStep(0)}

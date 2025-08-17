@@ -41,7 +41,11 @@ export default function Assessment() {
     return (
         <section className="flex flex-col items-center justify-center min-h-screen w-full gap-6 pt-20 px-4">
             {step === 0 && <FirstStep setStep={setStep} />}
-            {step === 1 && <ResumeSection setStep={setStep} />}
+            {step === 1 && <ResumeSection
+                setStep={setStep}
+                setGeneratedRoadmap={setGeneratedRoadmap}
+            />
+            }
             {step === 2 && !selectedLevel && (
                 <ManualSelection
                     setStep={setStep}
@@ -69,7 +73,7 @@ export default function Assessment() {
                             .trim();
 
                         // ✅ Split into intro + phases
-                        const [intro, ...phases] = cleanedRoadmap.split(/(?=Phase\s+\d+:)/i);
+                        const [intro, ...phases] = cleanedRoadmap.split(/(?=\*\*Phase\s+\d+:)/i);
 
                         const sections = [
                             { title: "Introduction", content: intro },

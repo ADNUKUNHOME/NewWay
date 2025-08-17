@@ -33,7 +33,7 @@ export default function AssessmentForm({
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         CreateRoadmapApiCall({ formData }).then((data) => {
