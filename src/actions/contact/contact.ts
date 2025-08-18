@@ -1,0 +1,36 @@
+import axios from "axios";
+
+export async function SendEmail({
+    formData
+}: {
+    formData: {
+        name: string;
+        email: string;
+        message: string;
+    }
+}) {
+    try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact`, formData);
+        return response.data;
+    } catch (error) {
+        console.error("Error sending email:", error);
+        if (axios.isAxiosError(error)) {
+            if (error.response) {
+                return {
+                    success: false,
+                    message: error.response?.data?.message || "An error occurred while sending the email."
+                };
+            }
+            if (error.request) {
+                return {
+                    success: false,
+                    message: "No response from server. Please check your internet!"
+                }
+            }
+        }
+        return {
+            success: false,
+            message: "Error while sending the email!"
+        }
+    }
+}

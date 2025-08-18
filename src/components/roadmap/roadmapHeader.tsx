@@ -9,10 +9,12 @@ export default function RoadmapHeader({
     sections,
     isRealRoadmap,
     FetchRoadmap,
+    loading
 }: {
     sections: { title: string, content: string }[];
     isRealRoadmap: boolean;
     FetchRoadmap: () => void;
+    loading: boolean;
 }) {
     return (
         <Card className="flex flex-col items-center justify-center bg-black/10 backdrop-blur-xs border-0 border-t border-b border-slate-400 hover:shadow-2xl text-center mt-16  py-5 px-12 sm:px-5 md:px-10 mb-8  w-full sm:w-[500px] md:w-[650px] lg:w-[800px]">
@@ -33,8 +35,13 @@ export default function RoadmapHeader({
                         variant="outline"
                         onClick={FetchRoadmap}
                         className="bg-yellow-500 hover:bg-yellow-600 text-white border-none rounded-md"
+                        disabled={loading}
                     >
-                        Load to fetch roadmap
+                        {
+                            loading ?
+                                "Loading to fetch roadmap..."
+                                : "Load to fetch roadmap"
+                        }
                     </Button>
                 )
             }

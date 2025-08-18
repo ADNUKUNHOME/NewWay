@@ -70,6 +70,7 @@ export default function Roadmap() {
                 sections={sections}
                 isRealRoadmap={isRealRoadmap}
                 FetchRoadmap={FetchRoadmap}
+                loading={loading}
             />
             <RoadmapCard
                 sections={sections}
