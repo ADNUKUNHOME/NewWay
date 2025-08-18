@@ -1,12 +1,35 @@
-import { Upload, UserRoundPen } from "lucide-react";
+import { FileWarning, Upload, UserRoundPen } from "lucide-react";
+import Link from "next/link";
 
-export default function FirstStep({ setStep }: { setStep: (step: number) => void }) {
+export default function FirstStep({
+    setStep,
+    hasRoadmap,
+}: {
+    setStep: (step: number) => void;
+    hasRoadmap: boolean | undefined;
+}) {
     return (
         <div className="flex flex-col items-center gap-6 max-w-2xl">
             <h1 className="text-3xl font-bold text-white text-center">
                 How would you like to proceed?
             </h1>
             <div className="flex flex-col gap-4 w-full">
+                {
+                    hasRoadmap &&
+                    <div
+                        className="flex items-center bg-black/55 hover:bg-black/70 px-6 py-4 text-amber-200 border border-dashed border-amber-400 rounded-lg w-full mb-6"
+                    >
+                        <span className="mr-4 text-3xl">⚠</span>
+                        <span className="text-sm md:text-base">
+                            You can't create roadmap when you have one already! You can edit the existing roadmap instead. Go to {" "}
+                            <Link
+                                href="/roadmap"
+                                className="font-bold underline text-amber-400"
+                            >Roadmap</Link>{" "}
+                            to edit.</span>
+                    </div>
+                }
+
                 {/* Upload Resume */}
                 <div
                     onClick={() => setStep(1)}

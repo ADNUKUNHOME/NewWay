@@ -7,9 +7,11 @@ import { toast } from "sonner";
 export default function ResumeSection({
     setStep,
     setGeneratedRoadmap,
+    hasRoadmap,
 }: {
     setStep: (step: number) => void;
     setGeneratedRoadmap: (roadmap: string | null) => void;
+    hasRoadmap: boolean | undefined;
 }) {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -89,7 +91,7 @@ export default function ResumeSection({
             <Button
                 onClick={handleSubmit}
                 className="mt-4 px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700"
-                disabled={!selectedFile || loading}
+                disabled={!selectedFile || loading || hasRoadmap}
             >
                 {
                     loading ? "Generating Roadmap..." : "Generate Roadmap"

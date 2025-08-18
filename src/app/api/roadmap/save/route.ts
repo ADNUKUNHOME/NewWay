@@ -1,4 +1,5 @@
 import Roadmap from "@/lib/models/roadmap";
+import User from "@/lib/models/user";
 import { connectDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
@@ -20,6 +21,12 @@ export async function POST(req: Request) {
             createdBy,
         });
         await NewRoadmap.save();
+
+        // ✅ Update the user with hasRoadmap = true
+        await User.findOneAndUpdate(
+            { email: createdBy },
+            { $set: { hasRoadmap: true } }
+        );
 
         return NextResponse.json(
             { success: true, message: "Roadmap saved successfully!" },

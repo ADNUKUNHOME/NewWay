@@ -12,11 +12,13 @@ export default function AssessmentForm({
     selectedLevel,
     setSelectedLevel,
     setStep,
+    hasRoadmap,
 }: {
     setGeneratedRoadmap: (roadmap: string | null) => void;
     selectedLevel: string;
     setSelectedLevel: (level: string) => void;
     setStep: (step: number) => void;
+    hasRoadmap: boolean | undefined;
 }) {
 
     const [loading, setLoading] = useState(false);
@@ -133,6 +135,7 @@ export default function AssessmentForm({
                 className="mt-4 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition"
                 disabled={
                     loading ||
+                    hasRoadmap ||
                     !formData.name.trim() ||
                     !formData.interests.trim() ||
                     !formData.timePerWeek.trim() ||

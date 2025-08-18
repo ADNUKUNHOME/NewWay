@@ -19,6 +19,8 @@ export default function Assessment() {
     const { user } = useAuth();
     const [activePhase, setActivePhase] = useState(0);
 
+    const hasRoadmap = user?.hasRoadmap;
+
     const handleSavingRoadmap = () => {
         if (!generatedRoadmap) {
             toast.error("Please complete your assessment to create roadmap!");
@@ -40,10 +42,14 @@ export default function Assessment() {
 
     return (
         <section className="flex flex-col items-center justify-center min-h-screen w-full gap-6 pt-20 px-4">
-            {step === 0 && <FirstStep setStep={setStep} />}
+            {step === 0 && <FirstStep
+                setStep={setStep}
+                hasRoadmap={hasRoadmap}
+            />}
             {step === 1 && <ResumeSection
                 setStep={setStep}
                 setGeneratedRoadmap={setGeneratedRoadmap}
+                hasRoadmap={hasRoadmap}
             />
             }
             {step === 2 && !selectedLevel && (
@@ -58,6 +64,7 @@ export default function Assessment() {
                     selectedLevel={selectedLevel}
                     setSelectedLevel={setSelectedLevel}
                     setStep={setStep}
+                    hasRoadmap={hasRoadmap}
                 />
             )}
             {step === 4 && (
