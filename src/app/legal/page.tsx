@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const sections = [
     { key: "privacy", label: "Privacy Policy" },
@@ -10,6 +11,12 @@ const sections = [
 
 export default function LegalPage() {
     const [active, setActive] = useState("privacy");
+
+    const contentVariants = {
+        hidden: { opacity: 0, x: 50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 1 } },
+        exit: { opacity: 0, x: -50, transition: { duration: 0.5 } },
+    };
 
     return (
         <div className="min-h-screen bg-black/55 text-white py-12 px-6 mt-20">
@@ -36,73 +43,93 @@ export default function LegalPage() {
                 </div>
 
                 {/* Content */}
-                <div className="prose max-w-none">
-                    {active === "privacy" && (
-                        <div>
-                            <h2 className="text-2xl font-semibold mb-4">Privacy Policy</h2>
-                            <p>
-                                At <strong>NewWay</strong>, your privacy is very important to us.
-                                We only collect necessary information such as your email and
-                                profile details to provide our services. We do not sell or share
-                                your data with third parties. You can request deletion of your
-                                data anytime by contacting us.
-                            </p>
-                            <p>
-                                By using NewWay, you consent to our Privacy Policy and agree to
-                                the collection and use of information in accordance with this
-                                policy.
-                            </p>
-                        </div>
-                    )}
+                <div className="prose max-w-none min-h-[200px]">
+                    <AnimatePresence mode="wait">
+                        {active === "privacy" && (
+                            <motion.div
+                                key="privacy"
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                variants={contentVariants}
+                            >
+                                <h2 className="text-2xl font-semibold mb-4">Privacy Policy</h2>
+                                <p>
+                                    At <strong>NewWay</strong>, your privacy is very important to us.
+                                    We only collect necessary information such as your email and
+                                    profile details to provide our services. We do not sell or share
+                                    your data with third parties. You can request deletion of your
+                                    data anytime by contacting us.
+                                </p>
+                                <p>
+                                    By using NewWay, you consent to our Privacy Policy and agree to
+                                    the collection and use of information in accordance with this
+                                    policy.
+                                </p>
+                            </motion.div>
+                        )}
 
-                    {active === "terms" && (
-                        <div>
-                            <h2 className="text-2xl font-semibold mb-4">Terms of Service</h2>
-                            <p>
-                                Welcome to <strong>NewWay</strong>. By accessing or using our
-                                platform, you agree to comply with the following terms:
-                            </p>
-                            <ul className="list-disc pl-6">
-                                <li>You must use the site for lawful purposes only.</li>
-                                <li>
-                                    You may not misuse, hack, or exploit vulnerabilities in our
-                                    services.
-                                </li>
-                                <li>
-                                    We reserve the right to suspend or terminate accounts that
-                                    violate these terms.
-                                </li>
-                            </ul>
-                            <p>
-                                These terms are subject to change, and your continued use of
-                                NewWay means you agree to the updated terms.
-                            </p>
-                        </div>
-                    )}
+                        {active === "terms" && (
+                            <motion.div
+                                key="terms"
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                variants={contentVariants}
+                            >
+                                <h2 className="text-2xl font-semibold mb-4">Terms of Service</h2>
+                                <p>
+                                    Welcome to <strong>NewWay</strong>. By accessing or using our
+                                    platform, you agree to comply with the following terms:
+                                </p>
+                                <ul className="list-disc pl-6">
+                                    <li>You must use the site for lawful purposes only.</li>
+                                    <li>
+                                        You may not misuse, hack, or exploit vulnerabilities in our
+                                        services.
+                                    </li>
+                                    <li>
+                                        We reserve the right to suspend or terminate accounts that
+                                        violate these terms.
+                                    </li>
+                                </ul>
+                                <p>
+                                    These terms are subject to change, and your continued use of
+                                    NewWay means you agree to the updated terms.
+                                </p>
+                            </motion.div>
+                        )}
 
-                    {active === "cookies" && (
-                        <div>
-                            <h2 className="text-2xl font-semibold mb-4">Cookie Policy</h2>
-                            <p>
-                                <strong>NewWay</strong> uses cookies to enhance user experience
-                                and ensure secure login sessions.
-                            </p>
-                            <ul className="list-disc pl-6">
-                                <li>
-                                    <strong>Essential Cookies:</strong> Required for login and
-                                    navigation.
-                                </li>
-                                <li>
-                                    <strong>Analytics Cookies:</strong> Help us improve services by
-                                    understanding user behavior.
-                                </li>
-                            </ul>
-                            <p>
-                                You can disable cookies in your browser settings, but some
-                                features of NewWay may not function properly.
-                            </p>
-                        </div>
-                    )}
+                        {active === "cookies" && (
+                            <motion.div
+                                key="cookies"
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                variants={contentVariants}
+                            >
+                                <h2 className="text-2xl font-semibold mb-4">Cookie Policy</h2>
+                                <p>
+                                    <strong>NewWay</strong> uses cookies to enhance user experience
+                                    and ensure secure login sessions.
+                                </p>
+                                <ul className="list-disc pl-6">
+                                    <li>
+                                        <strong>Essential Cookies:</strong> Required for login and
+                                        navigation.
+                                    </li>
+                                    <li>
+                                        <strong>Analytics Cookies:</strong> Help us improve services by
+                                        understanding user behavior.
+                                    </li>
+                                </ul>
+                                <p>
+                                    You can disable cookies in your browser settings, but some
+                                    features of NewWay may not function properly.
+                                </p>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
         </div>

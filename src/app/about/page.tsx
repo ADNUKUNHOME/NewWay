@@ -25,7 +25,6 @@ export default function AboutPage() {
                 className="max-w-4xl mx-auto mb-16"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
             >
                 <h2 className="text-2xl font-semibold text-white mb-4">Our Mission</h2>
@@ -42,7 +41,6 @@ export default function AboutPage() {
                 className="max-w-4xl mx-auto mb-16"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
             >
                 <h2 className="text-2xl font-semibold text-white mb-8">Our Values</h2>
@@ -81,7 +79,6 @@ export default function AboutPage() {
                 className="max-w-4xl mx-auto mb-16"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.6 }}
             >
                 <h2 className="text-2xl font-semibold text-white mb-8">Meet the Team</h2>
@@ -112,7 +109,6 @@ export default function AboutPage() {
                 className="text-center max-w-3xl mx-auto"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.8 }}
             >
                 <h2 className="text-2xl font-bold text-white mb-4">

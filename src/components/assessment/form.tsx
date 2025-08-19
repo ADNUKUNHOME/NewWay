@@ -6,6 +6,8 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { CreateRoadmapApiCall } from "@/actions/roadmap/createRoadmap";
 import { toast } from "sonner";
+import AssessmentGuide from "./assessmentGuide";
+import { motion } from "framer-motion";
 
 export default function AssessmentForm({
     setGeneratedRoadmap,
@@ -39,126 +41,131 @@ export default function AssessmentForm({
         e.preventDefault();
         setLoading(true);
         CreateRoadmapApiCall({ formData }).then((data) => {
+            setLoading(false);
             if (data.success) {
-                setLoading(false);
                 toast.success("Roadmap created successfully!");
-                console.log("Roadmap created successfully:", data);
                 setGeneratedRoadmap(data.data.roadmap);
                 setStep(4);
             } else {
-                setLoading(false);
                 toast.error(data.message || "Failed to create roadmap.");
-                console.error("Error creating roadmap:", data);
             }
-        })
-    }
+        });
+    };
+
+    // Motion variants
+    const containerVariants = {
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
+
+    const staggerVariants = {
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.1 } }
+    };
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            className="w-full max-w-md flex flex-col gap-4 mt-10"
+        <motion.section
+            className="flex flex-col items-center min-h-screen px-6 md:px-16 py-12 gap-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={containerVariants}
         >
-            <h2 className="text-xl text-white font-semibold text-center">
-                You selected: {selectedLevel}
-            </h2>
-
-
-
-            {/* Common Fields */}
-
-            <Label htmlFor="name" className="text-white font-semibold">
-                Your Name
-            </Label>
-            <Input
-                id="name"
-                name="name"
-                placeholder="e.g., John Doe"
-                className="text-white placeholder:text-gray-400"
-                onChange={handleInputChange}
-                value={formData.name}
-                required
-            />
-
-            <Label htmlFor="interests" className="text-white font-semibold">
-                Your Interests
-            </Label>
-            <Input
-                id="interests"
-                name="interests"
-                placeholder="e.g., Science, Technology, etc."
-                className="text-white placeholder:text-gray-400"
-                onChange={handleInputChange}
-                value={formData.interests}
-                required
-            />
-
-            <Label htmlFor="timePerWeek" className="text-white font-semibold">
-                Time Commitment Per Week
-            </Label>
-            <Input
-                id="timePerWeek"
-                name="timePerWeek"
-                placeholder="e.g., 10 hours"
-                className="text-white placeholder:text-gray-400"
-                onChange={handleInputChange}
-                value={formData.timePerWeek}
-                required
-            />
-
-            <Label htmlFor="goals" className="text-white font-semibold">
-                Your Goals
-            </Label>
-            <Input
-                id="goals"
-                name="goals"
-                placeholder="e.g., Want to become a developer"
-                className="text-white placeholder:text-gray-400"
-                onChange={handleInputChange}
-                value={formData.goals}
-                required
-            />
-
-            <Label htmlFor="additionalInfo" className="text-white font-semibold">
-                Additional Information
-            </Label>
-            <Input
-                id="additionalInfo"
-                name="additionalInfo"
-                placeholder="Anything else you'd like to add"
-                className="text-white placeholder:text-gray-400"
-                onChange={handleInputChange}
-                value={formData.additionalInfo}
-            />
-
-            <Button
-                type="submit"
-                className="mt-4 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition"
-                disabled={
-                    loading ||
-                    hasRoadmap ||
-                    !formData.name.trim() ||
-                    !formData.interests.trim() ||
-                    !formData.timePerWeek.trim() ||
-                    !formData.goals.trim()
-                }
+            <motion.h1
+                className="text-4xl md:text-5xl font-extrabold text-center text-white mb-6"
+                variants={itemVariants}
             >
-                {
-                    loading ?
-                        "Creating Your Roadmap..."
-                        : "Submit Assessment"
-                }
-            </Button>
+                Assessment Form
+            </motion.h1>
 
-            <Button
-                type="button"
-                onClick={() => {
-                    setSelectedLevel("");
-                    setStep(2);
-                }}
-                className="text-md text-white mt-2 hover:text-blue-200 bg-red-500 px-2 py-2 rounded-lg transition hover:bg-red-700"
-            >
-                Go Back
-            </Button>
-        </form>
-    )
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
+                {/* Guide Section */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                    variants={itemVariants}
+                >
+                    <AssessmentGuide step={3} />
+                </motion.div>
+
+                {/* Form Section */}
+                <motion.form
+                    onSubmit={handleSubmit}
+                    className="w-full max-w-lg flex flex-col gap-5 bg-linear-to-br from-amber-900/50 to-black/60 p-8 rounded-2xl shadow-2xl"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                    variants={staggerVariants}
+                >
+                    <motion.h2
+                        className="text-2xl font-semibold text-white text-center mb-4"
+                        variants={itemVariants}
+                    >
+                        Your Selected Level: <span className="text-indigo-400 font-extrabold">{selectedLevel}</span>
+                    </motion.h2>
+
+                    {[
+                        { label: "Your Name", name: "name", placeholder: "e.g., John Doe", required: true },
+                        { label: "Your Interests", name: "interests", placeholder: "e.g., Science, Technology", required: true },
+                        { label: "Time Commitment Per Week", name: "timePerWeek", placeholder: "e.g., 10 hours", required: true },
+                        { label: "Your Goals", name: "goals", placeholder: "e.g., Want to become a developer", required: true },
+                        { label: "Additional Information", name: "additionalInfo", placeholder: "Anything else you'd like to add", required: false },
+                    ].map((field) => (
+                        <motion.div key={field.name} className="flex flex-col gap-1" variants={itemVariants}>
+                            <Label htmlFor={field.name} className="text-white font-semibold">
+                                {field.label}
+                            </Label>
+                            <Input
+                                id={field.name}
+                                name={field.name}
+                                placeholder={field.placeholder}
+                                className=" text-white placeholder:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-lg transition"
+                                onChange={handleInputChange}
+                                value={formData[field.name as keyof typeof formData]}
+                                required={field.required}
+                            />
+                        </motion.div>
+                    ))}
+
+                    {/* Submit Button */}
+                    <motion.div variants={itemVariants}>
+                        <Button
+                            type="submit"
+                            className="mt-4 px-6 py-3 w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl shadow-lg transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled={
+                                loading ||
+                                hasRoadmap ||
+                                !formData.name.trim() ||
+                                !formData.interests.trim() ||
+                                !formData.timePerWeek.trim() ||
+                                !formData.goals.trim()
+                            }
+                        >
+                            {loading ? "Creating Your Roadmap..." : "Submit Assessment"}
+                        </Button>
+                    </motion.div>
+
+                    {/* Go Back Button */}
+                    <motion.div variants={itemVariants}>
+                        <Button
+                            type="button"
+                            onClick={() => {
+                                setSelectedLevel("");
+                                setStep(2);
+                            }}
+                            className="mt-3 px-4 py-3 w-full bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl shadow transition transform hover:scale-105"
+                        >
+                            Go Back
+                        </Button>
+                    </motion.div>
+                </motion.form>
+            </div>
+        </motion.section>
+    );
 }

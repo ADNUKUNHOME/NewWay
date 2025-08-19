@@ -7,12 +7,11 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 const Login = () => {
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,11 +25,9 @@ const Login = () => {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
                 toast.success("Login successful!");
-                console.log("Login successful:", data);
                 window.location.href = "/";
             } else {
                 toast.error(data.message || "Login failed. Please try again.");
-                console.error("Login failed:", data);
             }
             setEmail("");
             setPassword("");
@@ -39,17 +36,38 @@ const Login = () => {
                 toast.error("An error occurred during login. Please try again later.");
                 console.error("Login error:", error);
             });
-
     }
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.1, duration: 0.5 } }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    };
+
     return (
-        <div className="flex items-center justify-center min-h-screen">
-            <div className="flex flex-col items-center justify-center">
-                <h1 className="text-3xl font-bold text-white">SignIn</h1>
-                <p className="text-gray-300 font-semibold my-4">Please enter your credentials to SignIn</p>
-                <form
+        <motion.div
+            className="flex items-center justify-center min-h-screen"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+        >
+            <motion.div className="flex flex-col items-center justify-center" variants={itemVariants}>
+                <motion.h1 className="text-3xl font-bold text-white mb-2" variants={itemVariants}>
+                    SignIn
+                </motion.h1>
+                <motion.p className="text-gray-300 font-semibold my-4" variants={itemVariants}>
+                    Please enter your credentials to SignIn
+                </motion.p>
+
+                <motion.form
                     onSubmit={handleLogin}
-                    className="w-full max-w-md p-6 rounded-lg border border-gray-300">
+                    className="w-full max-w-md p-6 rounded-lg border border-gray-300"
+                    variants={itemVariants}
+                >
                     <div className="mb-4">
                         <label className="block text-white mb-2" htmlFor="email">Email</label>
                         <Input
@@ -76,21 +94,20 @@ const Login = () => {
                     </div>
                     <Button
                         type="submit"
-                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md transition-colors">
+                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md transition-colors"
+                    >
                         Login
                     </Button>
                     <Separator className="my-4" />
                     <p className="text-gray-400 text-sm">
                         You don't have an account?{" "}
-                        <Link
-                            href="/auth/register"
-                            className="text-yellow-500 hover:text-yellow-600">
+                        <Link href="/auth/register" className="text-yellow-500 hover:text-yellow-600">
                             Register here
                         </Link>
                     </p>
-                </form>
-            </div>
-        </div>
+                </motion.form>
+            </motion.div>
+        </motion.div>
     )
 }
 

@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 export default function Contact() {
-
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -26,22 +26,36 @@ export default function Contact() {
 
         await SendEmail({ formData }).then((data) => {
             console.log("Response from SendEmail:", data);
+            setLoading(false);
             if (data.success) {
-                setLoading(false);
                 toast.success(data.message || "Message sent successfully!");
                 setFormData({ name: "", email: "", message: "" });
             } else {
-                setLoading(false);
                 toast.error(data.message || "Failed to send message. Please try again.");
             }
-        })
+        });
     }
+
+    const containerVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    };
 
     return (
         <section className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center px-6 py-16 mt-20">
-            <div className="max-w-5xl w-full grid md:grid-cols-2 gap-12">
+            <motion.div
+                className="max-w-5xl w-full grid md:grid-cols-2 gap-12"
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+            >
                 {/* Left Section - Intro */}
-                <div className="flex flex-col justify-center">
+                <motion.div
+                    className="flex flex-col justify-center"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                >
                     <h1 className="text-4xl md:text-5xl font-bold text-white">
                         Let’s Build the <span className="text-indigo-500">New Way</span> Together
                     </h1>
@@ -64,10 +78,15 @@ export default function Contact() {
                             <p>Kerala, India</p>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Right Section - Form */}
-                <div className="bg-gray-800 p-8 rounded-2xl shadow-lg">
+                <motion.div
+                    className="bg-gray-800 p-8 rounded-2xl shadow-lg"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                >
                     <form
                         className="space-y-6"
                         onSubmit={handleSubmit}
@@ -115,8 +134,8 @@ export default function Contact() {
                             {loading ? "Sending..." : "Send Message"}
                         </Button>
                     </form>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 }
