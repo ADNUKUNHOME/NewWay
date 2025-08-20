@@ -5,7 +5,7 @@ import { Card } from "../ui/card";
 import DeleteButton from "./deleteButton";
 import DownloadButton from "./downloadButton";
 import ShareButton from "./shareButton";
-import UpdateButton from "./updateButton";
+import TrackProgress from "./trackProgress";
 import { motion } from "framer-motion";
 
 export default function RoadmapHeader({
@@ -14,7 +14,7 @@ export default function RoadmapHeader({
     FetchRoadmap,
     loading
 }: {
-    sections: { title: string, content: string }[];
+    sections: { title: string; content: string }[];
     isRealRoadmap: boolean;
     FetchRoadmap: () => void;
     loading: boolean;
@@ -29,16 +29,10 @@ export default function RoadmapHeader({
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
     };
 
-    const buttonContainerVariants = {
-        hidden: {},
-        visible: { transition: { staggerChildren: 0.1 } }
-    };
-
     return (
         <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
+            animate="visible"
             variants={containerVariants}
         >
             <Card className="flex flex-col items-center justify-center bg-black/10 backdrop-blur-xs border-0 border-t border-b border-slate-400 hover:shadow-2xl text-center mt-16 py-5 px-12 sm:px-5 md:px-10 mb-8 w-full sm:w-[500px] md:w-[650px] lg:w-[800px]">
@@ -48,6 +42,7 @@ export default function RoadmapHeader({
                 >
                     Your Personalized Roadmap
                 </motion.h1>
+
                 <motion.p
                     className="text-lg text-gray-400"
                     variants={itemVariants}
@@ -55,28 +50,39 @@ export default function RoadmapHeader({
                     Here is your personalized roadmap based on your assessment results.
                 </motion.p>
 
-                {isRealRoadmap ? (
-                    <motion.div
-                        className="flex items-center justify-between w-full mt-4"
-                        variants={buttonContainerVariants}
-                    >
-                        <motion.div variants={itemVariants}>
+                {!isRealRoadmap ? (
+                    <div className="flex items-center justify-between w-full mt-4">
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             <DownloadButton roadmapData={sections} />
                         </motion.div>
-                        <motion.div variants={itemVariants}>
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             <ShareButton
-                                content={sections.map(s => `${s.title}\n\n${s.content}`).join("\n\n")}
+                                content={sections
+                                    .map(s => `${s.title}\n\n${s.content}`)
+                                    .join("\n\n")}
                             />
                         </motion.div>
-                        <motion.div variants={itemVariants}>
-                            <UpdateButton />
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <TrackProgress />
                         </motion.div>
-                        <motion.div variants={itemVariants}>
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             <DeleteButton />
                         </motion.div>
-                    </motion.div>
+                    </div>
                 ) : (
-                    <motion.div variants={itemVariants} className="mt-4">
+                    <div className="mt-4">
                         <Button
                             variant="outline"
                             onClick={FetchRoadmap}
@@ -85,9 +91,9 @@ export default function RoadmapHeader({
                         >
                             {loading ? "Loading to fetch roadmap..." : "Load to fetch roadmap"}
                         </Button>
-                    </motion.div>
+                    </div>
                 )}
             </Card>
         </motion.div>
-    )
+    );
 }

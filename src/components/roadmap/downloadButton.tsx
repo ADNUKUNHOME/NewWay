@@ -1,5 +1,10 @@
 import { DownloadIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export default function DownloadButton({ roadmapData }: { roadmapData: { title: string; content: string }[] }) {
     const handleDownload = () => {
@@ -25,13 +30,20 @@ export default function DownloadButton({ roadmapData }: { roadmapData: { title: 
     };
 
     return (
-        <Button
-            variant="default"
-            onClick={handleDownload}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition-colors duration-300"
-        >
-            <DownloadIcon />
-            <span className="hidden md:flex ml-2">Download</span>
-        </Button>
+        <Tooltip>
+            <TooltipTrigger>
+                <Button
+                    variant="default"
+                    onClick={handleDownload}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition-colors duration-300"
+                >
+                    <DownloadIcon />
+                    <span className="hidden md:flex ml-2">Download</span>
+                </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+                <p>Download Roadmap</p>
+            </TooltipContent>
+        </Tooltip>
     );
 }
