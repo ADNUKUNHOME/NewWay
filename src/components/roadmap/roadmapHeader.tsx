@@ -50,7 +50,7 @@ export default function RoadmapHeader({
                     Here is your personalized roadmap based on your assessment results.
                 </motion.p>
 
-                {!isRealRoadmap ? (
+                {isRealRoadmap ? (
                     <div className="flex items-center justify-between w-full mt-4">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
