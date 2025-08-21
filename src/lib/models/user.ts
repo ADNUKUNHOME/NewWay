@@ -14,6 +14,14 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    resetPasswordOtp: {
+        type: String,
+        default: null,
+    },
+    resetPasswordOtpExpiry: {
+        type: Date,
+        default: null,
+    },
 })
 
 const User = models.User || mongoose.model("User", UserSchema);

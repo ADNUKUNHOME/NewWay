@@ -50,7 +50,7 @@ const Login = () => {
 
     return (
         <motion.div
-            className="flex items-center justify-center min-h-screen"
+            className="flex items-center justify-center min-h-screen mt-20"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -92,6 +92,11 @@ const Login = () => {
                             required
                         />
                     </div>
+                    <p className="text-gray-400 text-sm mb-4">
+                        <Link href="/auth/forgotpassword" className="text-yellow-500 hover:text-yellow-600 hover:underline">
+                            Forgot your password?
+                        </Link>
+                    </p>
                     <Button
                         type="submit"
                         className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md transition-colors"

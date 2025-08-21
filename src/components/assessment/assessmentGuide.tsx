@@ -61,7 +61,7 @@ export default function AssessmentGuide({ step }: { step: number }) {
     const guide = stepGuides[step];
 
     return (
-        <div className="hidden md:flex flex-col justify-center min-w-[350px] p-8 bg-gradient-to-br from-indigo-900 via-gray-900 to-gray-800 rounded-2xl shadow-2xl text-white">
+        <div className="flex flex-col justify-center p-8 bg-gradient-to-br from-indigo-900 via-gray-900 to-gray-800 rounded-2xl shadow-2xl text-white">
             <div className="flex items-center mb-6 space-x-4">
                 {guide.icon}
                 <h2 className="text-3xl font-extrabold text-white">

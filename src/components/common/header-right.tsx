@@ -15,12 +15,12 @@ export default function HeaderRight({ user, logout }: { user: any, logout: () =>
                 <>
                     <Link
                         href="/auth/login"
-                        className="text-white bg-yellow-500 hover:bg-yellow-600 transition-colors px-4 py-2 mr-4 rounded-md">
+                        className="text-white font-bold bg-yellow-500 hover:bg-yellow-600 transition-colors px-4 py-2 mr-4 rounded-md">
                         Login
                     </Link>
                     <Link
                         href="/auth/register"
-                        className="bg-slate-200 hover:bg-yellow-600 hover:text-white transition-colors px-4 py-2 rounded-md">
+                        className="bg-slate-200 font-bold hover:bg-yellow-600 hover:text-white transition-colors px-4 py-2 rounded-md">
                         SignUp
                     </Link>
                 </>

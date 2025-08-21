@@ -72,8 +72,8 @@ export default function FirstStep({
                         >
                             <span className="mr-4 text-3xl">⚠</span>
                             <span className="text-sm md:text-base">
-                                You already have a roadmap! Edit your existing roadmap instead. Go to{" "}
-                                <Link href="/roadmap" className="font-bold underline text-amber-400">Roadmap</Link> to edit.
+                                You already have a roadmap! Delete that for creating new one. Go to{" "}
+                                <Link href="/roadmap" className="font-bold underline text-amber-400">Roadmap</Link> to delete.
                             </span>
                         </motion.div>
                     )}

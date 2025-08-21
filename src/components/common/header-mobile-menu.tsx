@@ -7,19 +7,14 @@ import { LogOut, SquareUserRound } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export default function HeaderMobileMenu({ user, logout }: { user: any, logout: () => void }) {
 
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [open, setOpen] = useState(false);
+    const [account, setAccount] = useState(false);
     const hasRoadmap = user?.hasRoadmap;
-    const pathname = usePathname();
-
-    useEffect(() => {
-        setOpen(false);
-    }, [pathname]);
 
     return (
         <div className="flex md:hidden">
@@ -48,26 +43,34 @@ export default function HeaderMobileMenu({ user, logout }: { user: any, logout: 
                         <SheetTitle className="font-bold my-4 text-yellow-500">NewWay</SheetTitle>
                         <div>
                             <div className="flex flex-col gap-6 text-white">
-                                <Link href={cn(user ? hasRoadmap ? "/roadmap" : "/assessment" : "/auth/login")}>
+                                <Link
+                                    onClick={() => setOpen(false)}
+                                    href={cn(user ? hasRoadmap ? "/roadmap" : "/assessment" : "/auth/login")}>
                                     {
                                         hasRoadmap ? "Roadmap" : "Assessment"
                                     }
                                 </Link>
-                                <Link href="/resources">
+                                <Link href="/resources" onClick={() => setOpen(false)}>
                                     Rosources
                                 </Link>
-                                <Link href="/about">
+                                <Link href="/about" onClick={() => setOpen(false)}>
                                     About
                                 </Link>
-                                <Link href="/contact">
+                                <Link href="/contact" onClick={() => setOpen(false)}>
                                     Contact
                                 </Link>
-                                <Separator />
+                                <Separator className="w-full" />
                                 <div className="flex flex-col gap-4">
                                     {
                                         user ? (
                                             <>
-                                                <div className="flex text-white">
+                                                <div
+                                                    className="flex text-white"
+                                                    onClick={() => {
+                                                        setOpen(false);
+                                                        setAccount(true);
+                                                        setConfirmOpen(true);
+                                                    }}>
                                                     <SquareUserRound className="mr-2" /> Account
                                                 </div>
                                                 <div
@@ -83,12 +86,14 @@ export default function HeaderMobileMenu({ user, logout }: { user: any, logout: 
                                                 <>
                                                     <Link
                                                         href="/auth/register"
+                                                        onClick={() => setOpen(false)}
                                                         className="text-white bg-yellow-500 hover:bg-yellow-600 transition-colors px-4 py-2 rounded-md">
                                                         SignUp
                                                     </Link>
                                                     <Link
                                                         href="/auth/login"
-                                                        className="bg-slate-200 hover:bg-yellow-600 hover:text-white transition-colors px-4 py-2 rounded-md">
+                                                        onClick={() => setOpen(false)}
+                                                        className="bg-slate-200 hover:bg-yellow-600 text-black hover:text-white transition-colors px-4 py-2 rounded-md">
                                                         Login
                                                     </Link>
                                                 </>
@@ -112,27 +117,49 @@ export default function HeaderMobileMenu({ user, logout }: { user: any, logout: 
                     side="bottom"
                     align="end"
                 >
+                    <h3 className="font-semibold text-lg mb-2">
+                        {account ? "Account Settings" : "Confirm Logout"}
+                    </h3>
+                    <Separator className="mb-2" />
+                    {
+                        account && (
+                            <p className="mb-3 text-sm font-bold">
+                                {user.email}
+                            </p>
+                        )
+                    }
                     <p className="mb-3 text-sm">
-                        Are you sure you want to log out?
+                        {
+                            account ? "Account settings are not available yet." : "Are you sure you want to log out?"
+                        }
                     </p>
                     <div className="flex justify-end gap-2">
                         <Button
                             variant="secondary"
                             size="sm"
-                            onClick={() => setConfirmOpen(false)}
-                        >
-                            Cancel
-                        </Button>
-                        <Button
-                            variant="destructive"
-                            size="sm"
                             onClick={() => {
-                                setConfirmOpen(false);
-                                logout();
+                                setAccount(false);
+                                setConfirmOpen(false)
                             }}
                         >
-                            Logout
+                            {
+                                account ? "Close" : "Cancel"
+                            }
                         </Button>
+                        {
+                            !account &&
+                            <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={async () => {
+                                    await logout();
+                                    setConfirmOpen(false);
+                                }}
+                            >
+                                Logout
+                            </Button>
+                        }
+
                     </div>
                 </PopoverContent>
             </Popover>

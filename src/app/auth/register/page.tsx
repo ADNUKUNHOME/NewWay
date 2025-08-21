@@ -20,6 +20,11 @@ const Register = () => {
             return;
         }
 
+        if (password.length < 8 || password.length > 20) {
+            toast.error("Password must be between 8 and 20 characters long");
+            return;
+        }
+
         handleRegisterApiCall(email, password).then((data) => {
             if (data.success) {
                 toast.success("Registration successful!");
@@ -44,7 +49,7 @@ const Register = () => {
 
     return (
         <motion.div
-            className="flex items-center justify-center min-h-screen"
+            className="flex items-center justify-center min-h-screen mt-20"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
