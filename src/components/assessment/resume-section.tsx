@@ -2,7 +2,7 @@
 
 import { useState, DragEvent } from "react";
 import { Button } from "../ui/button";
-import { FileUp } from "lucide-react";
+import { FileUp, Loader2 } from "lucide-react";
 import { ResumeRoadmapCreation } from "@/actions/roadmap/resumeRoadmapCreation";
 import { toast } from "sonner";
 import AssessmentGuide from "./assessmentGuide";
@@ -149,7 +149,7 @@ export default function ResumeSection({
                             className="mt-4 px-6 py-3 w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl shadow-lg transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={!selectedFile || loading || hasRoadmap}
                         >
-                            {loading ? "Generating Roadmap..." : "Generate Roadmap"}
+                            {loading ? <><Loader2 className="animate-spin" /> Generating Roadmap...</> : "Generate Roadmap"}
                         </Button>
                     </motion.div>
 

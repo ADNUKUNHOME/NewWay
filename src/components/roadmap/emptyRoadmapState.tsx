@@ -1,3 +1,4 @@
+import { Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 
@@ -26,7 +27,7 @@ export default function EmptyRoadmapState({
                 className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white"
                 onClick={() => FetchRoadmap()}
             >
-                {loading ? "Fetching Your Roadmap..." : "Refresh Roadmap"}
+                {loading ? <><Loader2 className="animate-spin" /> Fetching Your Roadmap...</> : "Refresh Roadmap"}
             </Button>
         </motion.div>
     );

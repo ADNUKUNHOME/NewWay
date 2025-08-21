@@ -1,5 +1,6 @@
 'use client';
 
+import { Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import DeleteButton from "./deleteButton";
@@ -89,7 +90,7 @@ export default function RoadmapHeader({
                             className="bg-yellow-500 hover:bg-yellow-600 text-white border-none rounded-md"
                             disabled={loading}
                         >
-                            {loading ? "Loading to fetch roadmap..." : "Load to fetch roadmap"}
+                            {loading ? <><Loader2 className="animate-spin" /> Loading to fetch roadmap...</> : "Load to fetch roadmap"}
                         </Button>
                     </div>
                 )}

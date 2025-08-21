@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Loader2 } from "lucide-react";
 import { ResetPassword, SendResetPasswordOTP } from "@/actions/auth/handleResetPassword";
 
 const ForgotPassword = () => {
@@ -95,7 +95,7 @@ const ForgotPassword = () => {
                             className="mb-4 text-white"
                         />
                         <Button className="w-full bg-yellow-500 hover:bg-yellow-700" onClick={handleSendOtp}>
-                            {loading ? "OTP Sending..." : "Send OTP"}
+                            {loading ? (<> <Loader2 className="animate-spin" /> OTP Sending...</>) : "Send OTP"}
                         </Button>
                     </motion.div>
                 ) : (
@@ -134,7 +134,7 @@ const ForgotPassword = () => {
                             className="mb-4 mt-7 text-white"
                         />
                         <Button className="w-full bg-yellow-500 hover:bg-yellow-700" onClick={handleResetPassword}>
-                            {loading ? "Password Resetting..." : "Reset Password"}
+                            {loading ? <><Loader2 className="animate-spin" /> Password Resetting...</> : "Reset Password"}
                         </Button>
                     </motion.div>
                 )}

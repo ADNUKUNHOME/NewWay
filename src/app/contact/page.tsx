@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 
 export default function Contact() {
     const [loading, setLoading] = useState(false);
@@ -131,7 +132,7 @@ export default function Contact() {
                             type="submit"
                             className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-md transition"
                         >
-                            {loading ? "Sending..." : "Send Message"}
+                            {loading ? <><Loader2 className="animate-spin" /> Sending...</> : "Send Message"}
                         </Button>
                     </form>
                 </motion.div>

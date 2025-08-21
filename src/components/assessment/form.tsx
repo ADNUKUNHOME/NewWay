@@ -8,6 +8,7 @@ import { CreateRoadmapApiCall } from "@/actions/roadmap/createRoadmap";
 import { toast } from "sonner";
 import AssessmentGuide from "./assessmentGuide";
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 
 export default function AssessmentForm({
     setGeneratedRoadmap,
@@ -147,7 +148,7 @@ export default function AssessmentForm({
                                 !formData.goals.trim()
                             }
                         >
-                            {loading ? "Creating Your Roadmap..." : "Submit Assessment"}
+                            {loading ? <><Loader2 className="animate-spin" /> Creating Your Roadmap...</> : "Submit Assessment"}
                         </Button>
                     </motion.div>
 
