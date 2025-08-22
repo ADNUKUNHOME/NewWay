@@ -15,7 +15,7 @@ interface User {
     hasRoadmap?: boolean;
 }
 
-export default function HeaderMobileMenu({ user, logout }: { user: User, logout: () => void }) {
+export default function HeaderMobileMenu({ user, logout }: { user: User | null, logout: () => void }) {
 
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [open, setOpen] = useState(false);
@@ -130,7 +130,7 @@ export default function HeaderMobileMenu({ user, logout }: { user: User, logout:
                     {
                         account && (
                             <p className="mb-3 text-sm font-bold">
-                                {user.email}
+                                {user?.email}
                             </p>
                         )
                     }

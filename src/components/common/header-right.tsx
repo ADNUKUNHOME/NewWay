@@ -7,7 +7,7 @@ interface User {
     hasRoadmap?: boolean;
 }
 
-export default function HeaderRight({ user, logout }: { user: User, logout: () => void }) {
+export default function HeaderRight({ user, logout }: { user: User | null, logout: () => void }) {
     return (
         <div className="hidden items-center md:flex">
             {user ? (
