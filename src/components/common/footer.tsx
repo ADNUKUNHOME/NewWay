@@ -1,4 +1,6 @@
-import Link from "next/link"; // ✅ add this
+'use client';
+
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Twitter, Linkedin, Instagram, Github } from "lucide-react";
 import { useAuth } from "../../../AuthContext";

@@ -1,3 +1,5 @@
+'use client';
+
 import { KeyFeatures } from "@/constants/HomeKeyfeatures";
 import { Card } from "../ui/card";
 import { motion } from "framer-motion";

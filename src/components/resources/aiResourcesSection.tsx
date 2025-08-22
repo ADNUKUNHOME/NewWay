@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Loader2, Sparkle } from "lucide-react";
 import ResourceGrid from "./resourcesGrid";
