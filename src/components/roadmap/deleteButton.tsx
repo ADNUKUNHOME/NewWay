@@ -43,7 +43,11 @@ export default function DeleteButton() {
                     <Button
                         variant="default"
                         onClick={() => {
-                            hasRoadmap ? setOpenDialog(true) : toast.error("You have to create a roadmap first!")
+                            if (hasRoadmap) {
+                                setOpenDialog(true);
+                            } else {
+                                toast.error("You have to create a roadmap first!");
+                            }
                         }}
                         className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-md transition-colors duration-300"
                     >

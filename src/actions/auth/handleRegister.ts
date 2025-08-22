@@ -1,19 +1,22 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export async function handleRegisterApiCall(email: string, password: string) {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/register`, {
+        const response = await axios.post(`/api/auth/register`, {
             email,
             password,
         });
         return response.data;
-    } catch (error: any) {
-        console.error("Error during registration:", error);
-
-        if (error.response?.data?.message) {
-            return { success: false, message: error.response.data.message };
+    } catch (error: unknown) {
+        // Narrow error type
+        if (axios.isAxiosError(error)) {
+            const serverMessage = error.response?.data?.message;
+            if (serverMessage) {
+                return { success: false, message: serverMessage };
+            }
         }
 
+        console.error("Error during registration:", error);
         return { success: false, message: "Registration failed. Please try again later." };
     }
 }

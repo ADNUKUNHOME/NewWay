@@ -105,7 +105,7 @@ const Login = () => {
                     </Button>
                     <Separator className="my-4" />
                     <p className="text-gray-400 text-sm">
-                        You don't have an account?{" "}
+                        You don&apos;t have an account?{" "}
                         <Link href="/auth/register" className="text-yellow-500 hover:text-yellow-600">
                             Register here
                         </Link>

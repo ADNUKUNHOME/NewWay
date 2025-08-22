@@ -34,7 +34,7 @@ export default function AssessmentForm({
         additionalInfo: "",
     });
 
-    const handleInputChange = (e: any) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 

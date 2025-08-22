@@ -1,7 +1,13 @@
 import Link from "next/link";
 import AvatarFunctions from "./avatarFunctions";
 
-export default function HeaderRight({ user, logout }: { user: any, logout: () => void }) {
+interface User {
+    id: string;
+    email: string;
+    hasRoadmap?: boolean;
+}
+
+export default function HeaderRight({ user, logout }: { user: User, logout: () => void }) {
     return (
         <div className="hidden items-center md:flex">
             {user ? (

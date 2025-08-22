@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CreateResourcesFromAI } from "@/actions/resources/fetchResources";
 import { useAuth } from "../../../AuthContext";
 import { DefaultResources } from "@/constants/defaultResources";
@@ -27,7 +27,7 @@ export default function ResourcesPage() {
     const { user } = useAuth();
     const userEmail = user?.email || "";
 
-    const fetchAIResources = async () => {
+    const fetchAIResources = useCallback(async () => {
         try {
             setLoading(true);
             const result = await CreateResourcesFromAI(userEmail);
@@ -47,7 +47,7 @@ export default function ResourcesPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [userEmail]);
 
     useEffect(() => {
         fetchAIResources();

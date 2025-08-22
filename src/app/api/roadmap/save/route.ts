@@ -32,11 +32,17 @@ export async function POST(req: Request) {
             { success: true, message: "Roadmap saved successfully!" },
             { status: 201 },
         );
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error saving roadmap:", error);
+
+        let message = "Failed to save roadmap. Please try again.";
+        if (error instanceof Error) {
+            message = error.message;
+        }
+
         return NextResponse.json(
-            { success: false, message: "Failed to save roadmap. Please try again." },
-            { status: 500 },
+            { success: false, message },
+            { status: 500 }
         );
     }
 }

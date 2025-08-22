@@ -8,7 +8,7 @@ export async function CreateResourcesFromAI(userEmail: string) {
             throw new Error("user is not authenticated!");
         }
 
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/resources/ai`, { userEmail });
+        const response = await axios.post(`/api/resources/ai`, { userEmail });
         return response.data;
     } catch (error) {
         console.log("Failed fetching Resources: ", error);

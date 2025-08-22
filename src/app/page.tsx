@@ -1,4 +1,3 @@
-import Image from "next/image";
 import HomeHero from "../components/home/hero";
 import HowItWorks from "@/components/home/howitworks";
 import KeyFeatures from "../components/home/keyfeatures";

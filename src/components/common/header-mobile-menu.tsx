@@ -9,7 +9,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { useState } from "react";
 
-export default function HeaderMobileMenu({ user, logout }: { user: any, logout: () => void }) {
+interface User {
+    id: string;
+    email: string;
+    hasRoadmap?: boolean;
+}
+
+export default function HeaderMobileMenu({ user, logout }: { user: User, logout: () => void }) {
 
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [open, setOpen] = useState(false);

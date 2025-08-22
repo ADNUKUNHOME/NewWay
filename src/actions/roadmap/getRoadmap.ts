@@ -3,14 +3,14 @@ import axios from "axios";
 export async function GetRoadmapApiCall(createdBy: string) {
     try {
         console.log("Fetching roadmap for createdBy:", createdBy);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/roadmap/get`,
+        const response = await axios.get(`/api/roadmap/get`,
             { params: { createdBy } }
         );
 
         console.log("Response from GetRoadmapApiCall:", response.data);
 
         return response.data;
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error fetching roadmap", error);
 
         if (axios.isAxiosError(error)) {

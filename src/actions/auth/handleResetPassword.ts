@@ -3,7 +3,7 @@ import axios from "axios";
 export async function SendResetPasswordOTP(email: string) {
     try {
 
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/forgotpassword`, { email });
+        const response = await axios.post(`/api/auth/forgotpassword`, { email });
         return response.data;
 
     } catch (error) {
@@ -41,7 +41,7 @@ export async function ResetPassword({
 }) {
     try {
 
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/resetpassword`, { email, otp, newPassword });
+        const response = await axios.post(`/api/auth/resetpassword`, { email, otp, newPassword });
         return response.data;
 
     } catch (error) {

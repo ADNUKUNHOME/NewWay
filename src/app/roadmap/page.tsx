@@ -1,7 +1,7 @@
 'use client';
 
 import { GetRoadmapApiCall } from "@/actions/roadmap/getRoadmap";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../../AuthContext";
 import { toast } from "sonner";
 import RoadmapHeader from "@/components/roadmap/roadmapHeader";
@@ -31,12 +31,12 @@ export default function Roadmap() {
         ];
     };
 
-    const FetchRoadmap = () => {
+    const FetchRoadmap = useCallback(async () => {
         if (!createdBy) return;
         setLoading(true);
         setHasTriedRefresh(true);
 
-        GetRoadmapApiCall(createdBy).then((data) => {
+        await GetRoadmapApiCall(createdBy).then((data) => {
             if (data.success && data.roadmap?.description) {
                 const roadmapText = data.roadmap.description;
                 setSections(splitRoadmap(roadmapText));
@@ -54,7 +54,7 @@ export default function Roadmap() {
             }
             setLoading(false);
         });
-    };
+    }, [createdBy, hasTriedRefresh]);
 
 
     useEffect(() => {

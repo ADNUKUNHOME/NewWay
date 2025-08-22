@@ -66,12 +66,18 @@ export async function POST(req: Request) {
             },
             { status: 200 }
         );
-    } catch (error: any) {
-        console.log("An error occurred while sending OTP: ", error);
+    } catch (error: unknown) {
+        console.error("An error occurred while sending OTP:", error);
+
+        let message = "An error occurred while sending OTP!";
+        if (error instanceof Error) {
+            message = error.message;
+        }
+
         return NextResponse.json(
             {
                 success: false,
-                message: error.message || "An error occurred while sending OTP!",
+                message,
             },
             { status: 500 }
         );

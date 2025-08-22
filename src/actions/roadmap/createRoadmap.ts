@@ -1,29 +1,29 @@
 import axios from "axios";
 
-export async function CreateRoadmapApiCall({ formData }: { formData: any }) {
+interface CreateRoadmapFormData {
+    name: string;
+    education: string;
+    interests: string;
+    timePerWeek: string;
+    goals: string;
+    additionalInfo: string;
+}
+
+export async function CreateRoadmapApiCall({ formData }: { formData: CreateRoadmapFormData }) {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/roadmap/generate`, formData);
-
-        if (response.status === 200) {
-            return {
-                success: true,
-                message: "Roadmap generated successfully!",
-                data: response.data,
-            };
-        }
-
+        const response = await axios.post(`/api/roadmap/generate`, formData);
         return {
-            success: false,
-            message: "Failed to generate roadmap. Please try again.",
-
+            success: true,
+            message: "Roadmap generated successfully!",
+            data: response.data,
         };
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error during roadmap generation:", error);
-
-        const message = error?.response?.data?.message || "Roadmap generation failed. Please try again.";
-
-        return { success: false, message };
-
+        if (axios.isAxiosError(error) && error.response) {
+            const message = error.response.data?.message || "Failed to generate roadmap. Please try again.";
+            return { success: false, message };
+        }
+        return { success: false, message: "An unexpected error occurred. Please try again." };
     }
 }

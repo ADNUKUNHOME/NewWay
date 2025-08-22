@@ -11,7 +11,7 @@ export const signJwt = (payload: object,) => {
 export const verifyJwt = (token: string) => {
     try {
         return jwt.verify(token, JWT_SECRET);
-    } catch (error) {
+    } catch {
         return null;
     }
 }

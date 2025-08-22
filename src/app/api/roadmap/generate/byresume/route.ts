@@ -66,11 +66,17 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ success: true, roadmap });
 
-    } catch (error: any) {
-        console.error("Error creating roadmap: ", error);
+    } catch (error: unknown) {
+        console.error("Error creating roadmap:", error);
+
+        let message = "Failed to create roadmap by resume. Please try again!";
+        if (error instanceof Error) {
+            message = error.message;
+        }
+
         return NextResponse.json(
-            { success: false, message: error.message || "Failed to create roadmap by resume. Please try again!" },
+            { success: false, message },
             { status: 500 }
-        )
+        );
     }
 }
