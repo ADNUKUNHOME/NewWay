@@ -1,4 +1,4 @@
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/afbcac22-dbb6-4d4d-bb79-baae90cec71a" /># 🌐 NewWay – AI-Powered Personalized Roadmap Platform  
+# 🚀 NewWay - AI-Powered Student Roadmap Platform  
 
 🚀 [Live Demo](https://newway-woad.vercel.app)  
 
