@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 export async function handleRegisterApiCall(email: string, password: string) {
     try {

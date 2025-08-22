@@ -60,7 +60,7 @@ export default function Roadmap() {
     useEffect(() => {
         if (!createdBy) return;
         FetchRoadmap();
-    }, [createdBy]);
+    }, [FetchRoadmap]);
 
 
 

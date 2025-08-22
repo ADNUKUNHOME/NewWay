@@ -51,7 +51,7 @@ export default function ResourcesPage() {
 
     useEffect(() => {
         fetchAIResources();
-    }, [userEmail]);
+    }, [fetchAIResources]);
 
 
     return (
