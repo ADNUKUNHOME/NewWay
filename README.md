@@ -1,10 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/afbcac22-dbb6-4d4d-bb79-baae90cec71a" /># 🌐 NewWay – AI-Powered Personalized Roadmap Platform  
 
-## Getting Started
+🚀 [Live Demo](https://newway-woad.vercel.app)  
 
-First, run the development server:
+NewWay is an **AI-powered career guidance platform** that analyzes students and generates **personalized skill roadmaps and learning resources**.  
+Built with **Next.js 15, TypeScript, Tailwind CSS, and Gemini AI**, the platform ensures a smooth, modern, and intelligent experience.  
+
+---
+
+## 🛠️ Tech Stack  
+
+**Frontend:**  
+
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) &nbsp;
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)  &nbsp;
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)  &nbsp;
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)  &nbsp;
+![Shadcn](https://img.shields.io/badge/Shadcn_UI-000000?style=for-the-badge&logo=shadcnui&logoColor=white)  &nbsp;
+
+**Backend / APIs:**  
+
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)  &nbsp;
+![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)  &nbsp;
+![GeminiAI](https://img.shields.io/badge/Gemini_AI-4285F4?style=for-the-badge&logo=google&logoColor=white)  &nbsp;
+![Zod](https://img.shields.io/badge/Zod-3068B7?style=for-the-badge&logo=zod&logoColor=white)  &nbsp;
+
+**Utilities:**  
+
+![Brevo](https://img.shields.io/badge/Brevo_Email-2C6ECB?style=for-the-badge&logo=maildotru&logoColor=white)  &nbsp;
+![Nodemailer](https://img.shields.io/badge/Nodemailer-00B140?style=for-the-badge&logo=gmail&logoColor=white)  &nbsp;
+![Vercel](https://img.shields.io/badge/Vercel_Deploy-000000?style=for-the-badge&logo=vercel&logoColor=white)  &nbsp;
+
+---
+
+## ✨ Features  
+
+✅ **AI-Generated Roadmaps** – Uses **Gemini AI** to analyze student goals and generate step-by-step personalized roadmaps.  
+✅ **AI-Powered Learning Resources** – Curated resources tailored to each skill level.  
+✅ **Email Notifications** – Integrated with **Brevo / NodeMailer** for sending verification & contact updates.  
+✅ **Form Validation with Zod** – Ensures secure and type-safe form handling.  
+✅ **Modern UI with Shadcn** – Elegant, accessible, and reusable components.  
+✅ **Responsive & Fast** – Built with **Next.js 15** + **Tailwind CSS** for lightning-fast performance.  
+✅ **Loading Skeletons & Spinners** – Professional loading states for smooth user experience.  
+✅ **Fully Deployed on Vercel** – CI/CD with GitHub integration.  
+
+---
+
+## 📂 Project Structure  
+
+/src
+├── /app → Next.js App Router pages
+├── /components → Reusable UI components
+├── /lib → Configs & utility functions
+├── /actions → Server actions & API handlers
+
+---
+
+## 🚀 Getting Started  
+
+Clone the repository and install dependencies: 
 
 ```bash
+git clone https://github.com/ADNUKUNHOME/NewWay.git
+cd newway
+
 npm run dev
 # or
 yarn dev
@@ -13,24 +71,23 @@ pnpm dev
 # or
 bun dev
 ```
+### Visit http://localhost:3000 to view the app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔹 Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+JWT_SECRET=*****
+GEMINI_API_KEY=*****
+MONGODB_URI=*****
+BREVO_SMTP_USER=*****
+BREVO_SMTP_KEY=*****
+ADMIN_EMAIL=your-brevo-verified-emailID
 
-## Learn More
+## 📬 Contact  
 
-To learn more about Next.js, take a look at the following resources:
+👤 Muhammad Adnan k
+- Portfolio: [View Here](https://my-portfolio-end-to-end-with-mern-1.onrender.com)  
+- LinkedIn: [Muhammad Adnan](https://www.linkedin.com/in/muhammad-adnan-a479052a1)  
+- Email: adnukunhome7@gmail.com  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⭐ If you like this project, consider giving it a star on GitHub! ⭐
