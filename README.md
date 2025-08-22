@@ -46,12 +46,13 @@ Built with **Next.js 15, TypeScript, Tailwind CSS, and Gemini AI**, the platform
 ---
 
 ## 📂 Project Structure  
-
+```bash
 /src
 ├── /app → Next.js App Router pages
 ├── /components → Reusable UI components
 ├── /lib → Configs & utility functions
 ├── /actions → Server actions & API handlers
+```
 
 ---
 
@@ -71,23 +72,24 @@ pnpm dev
 # or
 bun dev
 ```
-### Visit http://localhost:3000 to view the app.
+#### Visit http://localhost:3000 to view the app.
 
 
 ## 🔹 Environment Variables
-
+```bash
 JWT_SECRET=*****
 GEMINI_API_KEY=*****
 MONGODB_URI=*****
 BREVO_SMTP_USER=*****
 BREVO_SMTP_KEY=*****
 ADMIN_EMAIL=your-brevo-verified-emailID
+```
 
 ## 📬 Contact  
 
 👤 Muhammad Adnan k
-- Portfolio: [View Here](https://my-portfolio-end-to-end-with-mern-1.onrender.com)  
-- LinkedIn: [Muhammad Adnan](https://www.linkedin.com/in/muhammad-adnan-a479052a1)  
+- Portfolio: [Visit Now](https://my-portfolio-end-to-end-with-mern-1.onrender.com)  
+- LinkedIn: [MUHAMMAD ADNAN K](https://www.linkedin.com/in/muhammad-adnan-a479052a1)    
 - Email: adnukunhome7@gmail.com  
 
 ## ⭐ If you like this project, consider giving it a star on GitHub! ⭐
