@@ -32,6 +32,11 @@ export default function Assessment() {
         }).then((data) => {
             if (data.success) {
                 toast.success(data.message || "Roadmap saved successfully!");
+                const user = JSON.parse(localStorage.getItem("user") || "{}");
+                if (user) {
+                    user.hasRoadmap = true;
+                }
+                localStorage.setItem("user", JSON.stringify(user));
             } else {
                 toast.error(data.message || "Failed to save roadmap! Please try again.");
             }

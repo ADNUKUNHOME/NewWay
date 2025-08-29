@@ -42,7 +42,7 @@ export default function HomeHero() {
                     className="mt-6"
                 >
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button className="mt-8 px-10 py-3 bg-slate-200 hover:bg-white hover:no-underline text-black font-semibold rounded-lg transition-all duration-300">
+                        <Button className="mt-8 px-10 py-3 bg-slate-200 hover:bg-white hover:no-underline text-black font-semibold cursor-pointer rounded-lg transition-all duration-300">
                             Get Started
                             <ArrowRight className="ml-2 inline-block" />
                         </Button>

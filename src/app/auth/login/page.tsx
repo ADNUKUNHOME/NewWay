@@ -107,7 +107,7 @@ const Login = () => {
                         type="submit"
                         className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md transition-colors"
                     >
-                        {loading ? <><Loader2 className="animate-spin" /> Loading...</> : "Login"}
+                        {loading ? <><Loader2 className="animate-spin" /> Loading...</> : " Login"}
                     </Button>
                     <Separator className="my-4" />
                     <p className="text-gray-400 text-sm">
