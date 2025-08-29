@@ -3,7 +3,7 @@ import axios from "axios";
 export async function GetRoadmapApiCall(createdBy: string) {
     try {
         console.log("Fetching roadmap for createdBy:", createdBy);
-        const response = await axios.get(`/api/roadmap/get`,
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/roadmap/get`,
             { params: { createdBy } }
         );
 

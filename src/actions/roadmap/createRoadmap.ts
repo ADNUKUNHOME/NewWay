@@ -11,7 +11,7 @@ interface CreateRoadmapFormData {
 
 export async function CreateRoadmapApiCall({ formData }: { formData: CreateRoadmapFormData }) {
     try {
-        const response = await axios.post(`/api/roadmap/generate`, formData);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/roadmap/generate`, formData);
         return {
             success: true,
             message: "Roadmap generated successfully!",

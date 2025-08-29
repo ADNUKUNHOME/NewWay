@@ -3,7 +3,7 @@ import axios from "axios";
 export async function DeleteRoadmap(userEmail: string | undefined) {
     try {
 
-        const response = await axios.delete(`/api/roadmap/delete`, {
+        const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/roadmap/delete`, {
             data: { userEmail }
         });
         return response.data;

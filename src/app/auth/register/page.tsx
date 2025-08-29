@@ -8,10 +8,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 
 const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,22 +21,25 @@ const Register = () => {
             toast.error("Please fill in all fields");
             return;
         }
-
         if (password.length < 8 || password.length > 20) {
             toast.error("Password must be between 8 and 20 characters long");
             return;
         }
 
+        setLoading(true);
+
         handleRegisterApiCall(email, password).then((data) => {
             if (data.success) {
+                setLoading(false);
                 toast.success("Registration successful!");
+                setEmail("");
+                setPassword("");
                 window.location.href = "/auth/login";
             } else {
+                setLoading(false);
                 toast.error(data.message || "Registration failed. Please try again.");
             }
         });
-        setEmail("");
-        setPassword("");
     };
 
     const containerVariants = {
@@ -96,7 +101,7 @@ const Register = () => {
                         type="submit"
                         className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md transition-colors"
                     >
-                        SignUp
+                        {loading ? <><Loader2 className="animate-spin" /> Loading...</> : "SignUp"}
                     </Button>
                     <Separator className="my-4" />
                     <p className="text-gray-400 text-sm">

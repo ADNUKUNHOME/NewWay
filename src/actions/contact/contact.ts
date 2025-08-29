@@ -10,7 +10,7 @@ export async function SendEmail({
     }
 }) {
     try {
-        const response = await axios.post(`/api/contact`, formData);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact`, formData);
         return response.data;
     } catch (error) {
         console.error("Error sending email:", error);

@@ -30,6 +30,10 @@ export default function ResourcesPage() {
     const fetchAIResources = useCallback(async () => {
         try {
             setLoading(true);
+            if (!user) {
+                toast.error("Please login to get AI Resources!");
+                return;
+            }
             const result = await CreateResourcesFromAI(userEmail);
 
             if (result.success) {

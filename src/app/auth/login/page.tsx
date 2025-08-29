@@ -8,10 +8,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,22 +21,26 @@ const Login = () => {
             toast.error("Please fill in all fields");
             return;
         }
+        setLoading(true);
 
         handleLoginApiCall(email, password).then((data) => {
             if (data.success) {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
+                setLoading(false);
                 toast.success("Login successful!");
                 window.location.href = "/";
+                setEmail("");
+                setPassword("");
             } else {
+                setLoading(false);
                 toast.error(data.message || "Login failed. Please try again.");
             }
-            setEmail("");
-            setPassword("");
         })
             .catch((error) => {
                 toast.error("An error occurred during login. Please try again later.");
                 console.error("Login error:", error);
+                setLoading(false);
             });
     }
 
@@ -101,7 +107,7 @@ const Login = () => {
                         type="submit"
                         className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md transition-colors"
                     >
-                        Login
+                        {loading ? <><Loader2 className="animate-spin" /> Loading...</> : "Login"}
                     </Button>
                     <Separator className="my-4" />
                     <p className="text-gray-400 text-sm">

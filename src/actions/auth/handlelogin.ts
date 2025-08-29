@@ -4,7 +4,7 @@ import axios from "axios";
 
 export async function handleLoginApiCall(email: string, password: string) {
     try {
-        const response = await axios.post(`/api/auth/login`, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
             email,
             password,
         });

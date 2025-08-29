@@ -11,7 +11,7 @@ export async function ResumeRoadmapCreation(
         const formData = new FormData();
         formData.append("resume", file);
 
-        const response = await axios.post(`/api/roadmap/generate/byresume`, formData);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/roadmap/generate/byresume`, formData);
         return response.data;
     } catch (error) {
         console.error("Error generating roadmap from resume", error);

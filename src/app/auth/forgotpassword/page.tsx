@@ -18,8 +18,8 @@ const ForgotPassword = () => {
     const [loading, setLoading] = useState(false);
 
     const handleSendOtp = async () => {
-        if (!email) {
-            toast.error("Please enter your email");
+        if (!email || !email.includes("@")) {
+            toast.error("Please enter a valid email");
             return;
         }
 

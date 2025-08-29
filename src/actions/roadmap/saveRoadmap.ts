@@ -11,7 +11,7 @@ export async function SaveRoadmapApiCall({
 
 }) {
     try {
-        const response = await axios.post(`/api/roadmap/save`, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/roadmap/save`, {
             roadmapName,
             description,
             createdBy,
