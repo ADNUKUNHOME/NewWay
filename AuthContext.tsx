@@ -10,6 +10,7 @@ interface User {
 
 interface AuthContextType {
     user: User | null;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
     logout: () => void;
 }
 
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, logout }}>
+        <AuthContext.Provider value={{ user, setUser, logout }}>
             {children}
         </AuthContext.Provider>
     )

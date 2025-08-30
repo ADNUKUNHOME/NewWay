@@ -1,6 +1,6 @@
 'use client';
 
-import { Trash2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import {
     Tooltip,
@@ -12,25 +12,36 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { useState } from "react";
 import { toast } from "sonner";
 import { DeleteRoadmap } from "@/actions/roadmap/deleteRoadmap";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function DeleteButton() {
 
     const [openDialog, setOpenDialog] = useState(false);
-    const { user } = useAuth();
+    const [loading, setLoading] = useState(false);
+    const { user, setUser } = useAuth();
     const userEmail = user?.email;
     const hasRoadmap = user?.hasRoadmap;
+    const router = useRouter();
 
     const handleDeleteRoadmap = async () => {
         setOpenDialog(false);
+        setLoading(true);
         toast("Deleting your Roadmap!");
         await DeleteRoadmap(userEmail).then((data) => {
             if (data.success) {
-                console.log("Roadmap deleted successfully: ", data)
+                console.log("Roadmap deleted successfully: ", data);
+                const user = JSON.parse(localStorage.getItem("user") || "{}");
+                if (user) {
+                    user.hasRoadmap = false;
+                }
+                localStorage.setItem("user", JSON.stringify(user));
+                setUser(user);
+                setLoading(false)
                 toast.success(data.message || "Roadmap Deleted Successfully!");
-                redirect('/assessment');
+                router.push("/assessment");
             } else {
-                console.log("Failed to delete Roadmap: ", data)
+                console.log("Failed to delete Roadmap: ", data);
+                setLoading(false)
                 toast.error(data.message || "Roadmap deletion Failed! Please try again.");
             }
         });
@@ -80,7 +91,7 @@ export default function DeleteButton() {
                             onClick={handleDeleteRoadmap}
                             variant="destructive"
                         >
-                            Delete
+                            {loading ? <><Loader2 className="animate-spin" />Deleting...</> : "Delete"}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

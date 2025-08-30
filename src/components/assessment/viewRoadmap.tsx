@@ -4,17 +4,20 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import ReactMarkdown from "react-markdown";
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 
 
 export default function ViewRoadmap({
     generatedRoadmap,
     setStep,
+    loading,
     setActivePhase,
     activePhase,
     handleSavingRoadmap,
 }: {
     generatedRoadmap: string | null;
     setStep: (step: number) => void;
+    loading: boolean;
     setActivePhase: (phase: number) => void;
     activePhase: number;
     handleSavingRoadmap: () => void;
@@ -87,9 +90,10 @@ export default function ViewRoadmap({
                 </Button>
                 <Button
                     onClick={handleSavingRoadmap}
+                    disabled={loading}
                     className="ml-4 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition"
                 >
-                    Save Roadmap
+                    {loading ? <><Loader2 className="animate-spin" /> Saving Roadmap...</> : "Save Roadmap"}
                 </Button>
             </div>
         </div>

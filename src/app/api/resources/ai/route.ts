@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
         await connectDB();
 
-        const roadmap = await Roadmap.findOne({ userEmail });
+        const roadmap = await Roadmap.findOne({ createdBy: userEmail });
         if (!roadmap) {
             return NextResponse.json(
                 { success: false, message: "The user does not have a roadmap!" },

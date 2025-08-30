@@ -9,13 +9,16 @@ import { toast } from "sonner";
 import { SaveRoadmapApiCall } from "@/actions/roadmap/saveRoadmap";
 import { useAuth } from "../../../AuthContext";
 import ViewRoadmap from "@/components/assessment/viewRoadmap";
+import { useRouter } from "next/navigation";
 
 export default function Assessment() {
     const [step, setStep] = useState(0);
     const [selectedLevel, setSelectedLevel] = useState("");
     const [generatedRoadmap, setGeneratedRoadmap] = useState<string | null>(null);
-    const { user } = useAuth();
+    const { user, setUser } = useAuth();
     const [activePhase, setActivePhase] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const hasRoadmap = user?.hasRoadmap;
 
@@ -24,6 +27,7 @@ export default function Assessment() {
             toast.error("Please complete your assessment to create roadmap!");
             return;
         }
+        setLoading(true);
 
         SaveRoadmapApiCall({
             roadmapName: "My Personalized Roadmap",
@@ -31,13 +35,17 @@ export default function Assessment() {
             createdBy: user?.email || "anonymous",
         }).then((data) => {
             if (data.success) {
+                setLoading(false);
                 toast.success(data.message || "Roadmap saved successfully!");
                 const user = JSON.parse(localStorage.getItem("user") || "{}");
                 if (user) {
                     user.hasRoadmap = true;
                 }
                 localStorage.setItem("user", JSON.stringify(user));
+                setUser(user);
+                router.push("/roadmap");
             } else {
+                setLoading(false);
                 toast.error(data.message || "Failed to save roadmap! Please try again.");
             }
         });
@@ -83,6 +91,7 @@ export default function Assessment() {
                 <ViewRoadmap
                     generatedRoadmap={generatedRoadmap}
                     setStep={setStep}
+                    loading={loading}
                     setActivePhase={setActivePhase}
                     activePhase={activePhase}
                     handleSavingRoadmap={handleSavingRoadmap}
