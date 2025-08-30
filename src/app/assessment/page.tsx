@@ -36,13 +36,12 @@ export default function Assessment() {
         }).then((data) => {
             if (data.success) {
                 setLoading(false);
-                toast.success(data.message || "Roadmap saved successfully!");
-                const user = JSON.parse(localStorage.getItem("user") || "{}");
                 if (user) {
-                    user.hasRoadmap = true;
+                    const updatedUser = { ...user, hasRoadmap: true };
+                    setUser(updatedUser);
+                    localStorage.setItem("user", JSON.stringify(updatedUser));
                 }
-                localStorage.setItem("user", JSON.stringify(user));
-                setUser(user);
+                toast.success(data.message || "Roadmap saved successfully!");
                 router.push("/roadmap");
             } else {
                 setLoading(false);

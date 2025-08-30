@@ -53,7 +53,7 @@ export default function ResumeSection({
                 setGeneratedRoadmap(data.roadmap);
                 setStep(4);
             } else {
-                toast.error(data.message || "Failed to create roadmap.");
+                toast.error("Failed to create roadmap. Please try again later!");
             }
         });
     };

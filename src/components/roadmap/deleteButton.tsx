@@ -27,25 +27,28 @@ export default function DeleteButton() {
         setOpenDialog(false);
         setLoading(true);
         toast("Deleting your Roadmap!");
+
         await DeleteRoadmap(userEmail).then((data) => {
             if (data.success) {
                 console.log("Roadmap deleted successfully: ", data);
-                const user = JSON.parse(localStorage.getItem("user") || "{}");
+
                 if (user) {
-                    user.hasRoadmap = false;
+                    const updatedUser = { ...user, hasRoadmap: false };
+                    setUser(updatedUser);
+                    localStorage.setItem("user", JSON.stringify(updatedUser));
                 }
-                localStorage.setItem("user", JSON.stringify(user));
-                setUser(user);
-                setLoading(false)
+
+                setLoading(false);
                 toast.success(data.message || "Roadmap Deleted Successfully!");
                 router.push("/assessment");
             } else {
                 console.log("Failed to delete Roadmap: ", data);
-                setLoading(false)
+                setLoading(false);
                 toast.error(data.message || "Roadmap deletion Failed! Please try again.");
             }
         });
-    }
+    };
+
 
     return (
         <>
