@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌐 NewWay — AI-Powered Personalized Roadmap Creator
 
-## Getting Started
+> 🚀 *“Your smarter way to learn, grow, and achieve.”*
 
-First, run the development server:
+NewWay is an **AI-driven roadmap creation web application** that analyzes an individual’s skills, interests, and career goals to generate a **personalized learning roadmap**.  
+It also provides **AI-recommended learning resources** (courses, videos, docs, etc.) tailored to each user’s roadmap, helping them progress efficiently and confidently.
 
+try it now: [https://newway-woad.vercel.app](https://newway-woad.vercel.app)
+
+---
+
+## 🧠 Core Idea
+
+Many learners struggle to find the right path or resources to reach their goals.  
+**NewWay** solves that by combining **Next.js**, **MERN stack**, and **AI (Gemini)** to automatically analyze user data and craft **custom learning journeys**.
+
+---
+
+## ✨ Features
+
+- 🔐 **User Authentication** — Secure login/register system using JWT  
+- 🧭 **AI Roadmap Generation** — Gemini AI analyzes input and builds a personalized learning path  
+- 📄 **Resume Upload** — Upload your resume (PDF/DOCX) and the system extracts skills and experience automatically using **LangChain, Mammoth, and PDFParser**  
+- 🎯 **Skill Assessment** — Users can also manually input or evaluate their current skill levels  
+- 📚 **AI Resource Recommendations** — Curated YouTube videos, articles, or documentation suggestions for each skill node  
+- 🧩 **Dynamic Roadmap UI** — Interactive roadmap visualization built with Framer Motion + Tailwind CSS  
+- 🗄️ **Database** — MongoDB (Atlas) for scalable data storage  
+- 🖥️ **Full-Stack Architecture** — Seamless integration between Next.js frontend and Express backend APIs  
+
+---
+
+## 🧰 Tech Stack
+
+| Layer | Technologies Used |
+|:------|:------------------|
+| **Frontend** | Next.js 15, React, Tailwind CSS, Framer Motion |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB Atlas (Mongoose ORM) |
+| **AI Integration** | Gemini API (Google Generative AI), LangChain |
+| **Resume Parsing** | Mammoth, PDFParser |
+| **Auth** | JSON Web Token (JWT) |
+| **Deployment** | Vercel |
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1️⃣ Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ADNUKUNHOME/NewWay.git
+cd NewWay
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install Dependencies
+```bash
+npm install
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3️⃣ Configure Environment Variables
+Create a .env.local file in project root directory
+```bash
+NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+JWT_SECRET=create-yourown-pass
 
-## Learn More
+GEMINI_API_KEY=your-gemini-api-key
 
-To learn more about Next.js, take a look at the following resources:
+MONGODB_URI=your-mongoDB-url
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+BREVO_SMTP_USER=your-brevo-smtp (for sending email for authentication status & reset password)
+BREVO_SMTP_KEY=your-brevo-smtp-key
+ADMIN_EMAIL=your-admin-email
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🤖 How AI & Roadmap Generation Works
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Users have **two input options**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Upload Resume (PDF/DOCX)**  
+   - PDFParser & Mammoth extract text.  
+   - LangChain processes skills and experience automatically.
+
+2. **Manual Input**  
+   - Users can enter their skills and experience directly.  
+
+**AI Roadmap Generation**  
+- Gemini AI analyzes the skills and goals to generate a personalized learning roadmap.
+
+**Resource Recommendations**  
+- Each skill node is paired with AI-curated resources (tutorials, videos, documentation).
+
+**Visualization**  
+- The roadmap is dynamically displayed using Framer Motion for smooth, interactive animations.
+
+
+---
+
+###  Future Enhancements
+
+ - 🧍 Personalized analytics dashboard
+
+ - 🧑‍🏫 Mentor/Student collaboration system
+
+ - 🧩 Integration with course APIs (Udemy, Coursera)
+
+ - 💬 AI Chat Assistant for guidance
+
+ - 📄 Export roadmap as PDF or share online
+
+--- 
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+Feel free to open a pull request or issue in the repository.
+
+---
+
+## 🧑‍💻 Author
+
+#### MUHAMMAD ADNAN K
+#### 🌍 Full Stack Developer | AI-Driven Web Creator
+#### 📧 adnukunhome7@gmail.com
+🔗 LinkedIn: [https://www.linkedin.com/in/muhammad-adnan-k-a479052a1](https://www.linkedin.com/in/muhammad-adnan-k-a479052a1)
+
+---
+
+### ⭐ If you like this project, give it a star on GitHub!
+ 
