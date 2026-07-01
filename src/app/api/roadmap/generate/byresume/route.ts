@@ -64,7 +64,7 @@ export async function POST(req: Request) {
 
         // ✅ Send extracted resume text to Gemini
         const prompt = RESUME_ROADMAP_GENERATION_PROMPT({ resumeText: extractedText });
-        const model = GenAi.getGenerativeModel({ model: "models/gemini-1.5-flash" });
+        const model = GenAi.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const result = await model.generateContent(prompt);
         const roadmap = result.response.text();
