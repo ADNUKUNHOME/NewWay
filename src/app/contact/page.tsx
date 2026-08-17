@@ -68,7 +68,7 @@ export default function Contact() {
                     <div className="mt-8 space-y-4">
                         <div className="flex items-center space-x-3 text-gray-300">
                             <span className="text-indigo-500 text-xl">📧</span>
-                            <p>brazlowseez5@gmail.com</p>
+                            <p>adnukunhome7@gmail.com</p>
                         </div>
                         <div className="flex items-center space-x-3 text-gray-300">
                             <span className="text-indigo-500 text-xl">📞</span>
