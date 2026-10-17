@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     const user = await User.findOne({ email });
     if (!user) {
         return NextResponse.json(
-            { success: false, message: "Invalid email or password" },
+            { success: false, message: "Please register first to login!" },
             { status: 401 },
         )
     }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
         return NextResponse.json(
-            { success: false, message: "Invalid email or password" },
+            { success: false, message: "Invalid password! Please try again." },
             { status: 401 },
         )
     }
