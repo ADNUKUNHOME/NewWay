@@ -1,9 +1,14 @@
 import { verifyJwt } from "@/lib/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
     const token = req.cookies.get("token")?.value;
     const verifiedToken = token && verifyJwt(token);
+
+    console.log("Auth diagnostic:", {
+        hasToken: Boolean(token),
+        verified: Boolean(verifiedToken),
+    });
 
     const { pathname } = req.nextUrl;
 

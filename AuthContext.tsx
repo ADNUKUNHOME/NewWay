@@ -26,12 +26,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, []);
 
-    const logout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        setUser(null);
-        window.location.href = "/auth/login";
-    }
+    const logout = async () => {
+        try {
+            await fetch("/api/auth/logout", {
+                method: "POST",
+            });
+        } finally {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            setUser(null);
+            window.location.href = "/auth/login";
+        }
+    };
 
     return (
         <AuthContext.Provider value={{ user, setUser, logout }}>
